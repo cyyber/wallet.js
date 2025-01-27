@@ -10,6 +10,8 @@ import {
   calculateSignatureBaseSize,
   getHeightFromSigSize,
   xmssVerifySig,
+  XMSSFastGenKeyPair,
+  xmssFastUpdate,
 } from '@theqrl/xmss';
 import {
   newQRLDescriptor,
@@ -18,7 +20,6 @@ import {
   newQRLDescriptorFromExtendedSeed,
 } from './classes.js';
 import { COMMON, CONSTANTS, OFFSET_PUB_SEED, OFFSET_ROOT, WOTS_PARAM } from './constants.js';
-import { XMSSFastGenKeyPair, xmssFastUpdate } from './xmssFast.js';
 import { extendedSeedBinToMnemonic } from '../utils/helper.js';
 
 /**
