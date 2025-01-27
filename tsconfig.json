@@ -1,10 +1,11 @@
 {
-  "include": ["src/**/*"],
+  "include": ["src/**/*.js"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationMap": true,
-    "outDir": "types"
+    "outDir": "dist/types"
   }
 }
