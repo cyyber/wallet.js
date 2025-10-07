@@ -1,4 +1,4 @@
-const { CryptoPublicKeyBytes, CryptoSecretKeyBytes, CryptoBytes } = require('@theqrl/dilithium5');
+const { CryptoPublicKeyBytes, CryptoSecretKeyBytes, CryptoBytes } = require('@theqrl/mldsa87');
 
 const { expect } = require('chai');
 

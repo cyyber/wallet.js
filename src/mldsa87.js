@@ -11,7 +11,7 @@ const {
   CryptoSecretKeyBytes,
   // SeedBytes,
   CryptoBytes,
-} = require('@theqrl/dilithium5');
+} = require('@theqrl/mldsa87');
 const { SeedBinToMnemonic } = require('./utils/mnemonic.js');
 
 function getDilithiumDescriptor(address) {

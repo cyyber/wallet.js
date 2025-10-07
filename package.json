@@ -14,7 +14,7 @@
   "author": "QRL contributors <info@theqrl.org> (https://theqrl.org)",
   "license": "MIT",
   "dependencies": {
-    "@theqrl/dilithium5": "^0.0.9",
+    "@theqrl/mldsa87": "file:../qrypto.js/packages/mldsa87",
     "randombytes": "^2.1.0",
     "sha3": "^2.1.4"
   },

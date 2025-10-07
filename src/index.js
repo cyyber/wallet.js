@@ -1,9 +1,9 @@
-const dilithium = require('./dilithium.js');
+const mldsa87 = require('./mldsa87.js');
 const mnemonic = require('./utils/mnemonic.js');
 const wordlist = require('./qrl/wordlist.js');
 
 module.exports = {
-  Dilithium: dilithium.Dilithium,
+  MLDSA87: mldsa87.MLDSA87,
   extractMessage: dilithium.extractMessage,
   extractSignature: dilithium.extractSignature,
   getDilithiumAddressFromPK: dilithium.getDilithiumAddressFromPK,
