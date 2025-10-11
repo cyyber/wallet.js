@@ -1,4 +1,4 @@
-export class Dilithium {
+export class MLDSA87 {
     constructor(seed?: any);
     pk: Uint8Array;
     sk: Uint8Array;
@@ -15,11 +15,11 @@ export class Dilithium {
     seal(message: any): any;
     sign(message: any): Uint8Array;
 }
-export function getDilithiumAddressFromPK(pk: any): Uint8Array;
-export function getDilithiumDescriptor(address: any): number;
+export function getMLDSA87AddressFromPK(pk: any): Uint8Array;
+export function getMLDSA87Descriptor(address: any): number;
 export function openMessage(signatureMessage: any, pk: any): any;
 export function verifyMessage(message: any, signature: any, pk: any): any;
 export function extractMessage(signatureMessage: any): any;
 export function extractSignature(signatureMessage: any): any;
-export function isValidDilithiumAddress(address: any): boolean;
-//# sourceMappingURL=dilithium.d.ts.map
+export function isValidMLDSA87Address(address: any): boolean;
+//# sourceMappingURL=mldsa87.d.ts.map

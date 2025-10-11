@@ -1,0 +1,2 @@
+const ADDRESS_SIZE = 20;
+const DESCRIPTOR_SIZE = 3;

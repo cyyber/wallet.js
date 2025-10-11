@@ -1,4 +1,5 @@
 const { SHAKE } = require('sha3');
+const { sha256 } = require('@noble/hashes/sha2.js');
 const randomBytes = require('randombytes');
 
 const {
@@ -6,42 +7,50 @@ const {
   cryptoSignKeypair,
   cryptoSignOpen,
   cryptoSignVerify,
-  // cryptoSignSignature,
   CryptoPublicKeyBytes,
   CryptoSecretKeyBytes,
-  // SeedBytes,
   CryptoBytes,
 } = require('@theqrl/mldsa87');
 const { SeedBinToMnemonic } = require('./utils/mnemonic.js');
 
-function getDilithiumDescriptor(address) {
+const ADDRESS_SIZE = 20;
+const DESCRIPTOR_SIZE = 3;
+
+function getMLDSA87Descriptor() {
   /*
-        In case of Dilithium address, it doesn't have any choice of hashFunction,
+        In case of MLDSA87 address, it doesn't have any choice of hashFunction,
         height, addrFormatType. Thus keeping all those values to 0 and assigning
         only signatureType in the descriptor.
     */
-  if (!address) {
-    throw new Error('Address is not defined');
-  }
-  return 2 << 4;
+  // if (!address) {
+  //   throw new Error('Address is not defined');
+  // }
+  const d = new Uint8Array(DESCRIPTOR_SIZE);
+  d[0] = 1;
+  d[1] = 0;
+  d[2] = 0;
+  return d;
 }
 
-function getDilithiumAddressFromPK(pk) {
-  const addressSize = 20;
-  const address = new Uint8Array(addressSize);
-  const descBytes = getDilithiumDescriptor(address);
-  address[0] = descBytes;
-  const hashedKey = new SHAKE(256);
-  hashedKey.update(Buffer.from(pk));
-  let hashedKeyDigest = hashedKey.digest({ buffer: Buffer.alloc(32), encoding: 'hex' });
-  hashedKeyDigest = hashedKeyDigest.slice(hashedKeyDigest.length - addressSize + 1);
-  for (let i = 0; i < hashedKeyDigest.length; i++) {
-    address[i + 1] = hashedKeyDigest[i];
+function getMLDSA87AddressFromPK(pk) {
+  const pkBuf = Buffer.from(pk);
+  const descBytes = getMLDSA87Descriptor();
+  const descBuf = Buffer.from(descBytes);
+
+  const preimage = Buffer.concat([descBuf, pkBuf])
+
+  const hasher = new SHAKE(256);
+  hasher.update(preimage);
+  let digest32 = hasher.digest({ buffer: Buffer.alloc(32), encoding: 'hex' });
+  
+  const address = new Uint8Array(ADDRESS_SIZE);
+  for (let i = 0; i < ADDRESS_SIZE; i++) {
+    address[i] = digest32[i];
   }
   return address;
 }
 
-class Dilithium {
+class MLDSA87 {
   constructor(seed = null) {
     this.pk = null;
     this.sk = null;
@@ -58,9 +67,7 @@ class Dilithium {
     const pk = new Uint8Array(CryptoPublicKeyBytes);
     const sk = new Uint8Array(CryptoSecretKeyBytes);
     const seed = randomBytes(48);
-    const hashedSeed = new SHAKE(256);
-    hashedSeed.update(seed);
-    const seedBuf = hashedSeed.digest({ buffer: Buffer.alloc(32) });
+    const seedBuf = Buffer.from(sha256(seed));
     cryptoSignKeypair(seedBuf, pk, sk);
     this.pk = pk;
     this.sk = sk;
@@ -70,9 +77,7 @@ class Dilithium {
   fromSeed() {
     const pk = new Uint8Array(CryptoPublicKeyBytes);
     const sk = new Uint8Array(CryptoSecretKeyBytes);
-    const hashedSeed = new SHAKE(256);
-    hashedSeed.update(this.seed);
-    const seedBuf = hashedSeed.digest({ buffer: Buffer.alloc(32) });
+    const seedBuf = Buffer.from(sha256(this.seed));
     cryptoSignKeypair(seedBuf, pk, sk);
     this.pk = pk;
     this.sk = sk;
@@ -99,7 +104,7 @@ class Dilithium {
   }
 
   getAddress() {
-    return getDilithiumAddressFromPK(this.pk);
+    return getMLDSA87AddressFromPK(this.pk);
   }
 
   // Seal the message, returns signature attached with message.
@@ -137,22 +142,22 @@ function extractSignature(signatureMessage) {
   return signatureMessage.slice(0, CryptoBytes);
 }
 
-function isValidDilithiumAddress(address) {
-  const d = getDilithiumDescriptor(address);
-  if (address[0] !== d) {
-    return false;
-  }
+function isValidMLDSA87Address(address) {
+  // const d = getMLDSA87Descriptor(address);
+  // if (address[0] !== d) {
+  //   return false;
+  // }
   // TODO: Add checksum
   return true;
 }
 
 module.exports = {
-  Dilithium,
-  getDilithiumAddressFromPK,
-  getDilithiumDescriptor,
+  MLDSA87,
+  getMLDSA87AddressFromPK,
+  getMLDSA87Descriptor,
   openMessage,
   verifyMessage,
   extractMessage,
   extractSignature,
-  isValidDilithiumAddress,
+  isValidMLDSA87Address,
 };
