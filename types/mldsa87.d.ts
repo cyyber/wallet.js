@@ -16,7 +16,7 @@ export class MLDSA87 {
     sign(message: any): Uint8Array;
 }
 export function getMLDSA87AddressFromPK(pk: any): Uint8Array;
-export function getMLDSA87Descriptor(address: any): number;
+export function getMLDSA87Descriptor(): Uint8Array;
 export function openMessage(signatureMessage: any, pk: any): any;
 export function verifyMessage(message: any, signature: any, pk: any): any;
 export function extractMessage(signatureMessage: any): any;
