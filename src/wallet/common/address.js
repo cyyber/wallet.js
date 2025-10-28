@@ -33,7 +33,7 @@ function addressToString(addrBytes) {
  * @param {Descriptor} descriptor
  */
 function getAddressFromPKAndDescriptor(pk, descriptor) {
-  const addr = unsafeGetAddress(pk, descriptor.ToBytes());
+  const addr = unsafeGetAddress(pk, descriptor.toBytes());
   if (addr.length !== ADDRESS_SIZE) {
     throw new Error('unexpected address size');
   }

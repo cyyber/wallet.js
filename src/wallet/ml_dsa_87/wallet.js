@@ -15,7 +15,7 @@ class Wallet {
     this.extendedSeed = ExtendedSeed.NewExtendedSeed(descriptor, seed);
   }
 
-  static NewWallet(metadata = [0, 0]) {
+  static newWallet(metadata = [0, 0]) {
     const descriptor = newMLDSA87Descriptor(metadata);
     const seedBytes = randomBytes(48);
     const seed = new Seed(seedBytes);
@@ -23,20 +23,20 @@ class Wallet {
     return new Wallet({ descriptor, seed, pk, sk });
   }
 
-  static NewWalletFromSeed(seed, metadata = [0, 0]) {
+  static newWalletFromSeed(seed, metadata = [0, 0]) {
     const descriptor = newMLDSA87Descriptor(metadata);
     const { pk, sk } = keygen(seed);
     return new Wallet({ descriptor, seed, pk, sk });
   }
 
-  static NewWalletFromExtendedSeed(extendedSeed) {
+  static newWalletFromExtendedSeed(extendedSeed) {
     const descriptor = newMLDSA87Descriptor(extendedSeed.GestDescriptorBytes().slice(1));
     const seed = extendedSeed.GetSeed();
     const { pk, sk } = keygen(seed);
     return new Wallet({ descriptor, seed, pk, sk });
   }
 
-  static NewWalletFromMnemonic(mnemonic) {
+  static newWalletFromMnemonic(mnemonic) {
     const seedBytes = mnemonicToBin(mnemonic);
     const seed = new Seed(seedBytes);
     const descriptor = newMLDSA87Descriptor();
@@ -45,20 +45,20 @@ class Wallet {
   }
 
   /** @returns {Uint8Array} length 20 */
-  GetAddress() {
-    return unsafeGetAddress(this.pk, this.descriptor.ToBytes());
+  getAddress() {
+    return unsafeGetAddress(this.pk, this.descriptor.toBytes());
   }
 
   /** @returns {string} "Q" + hex */
-  GetAddressStr() {
+  getAddressStr() {
     return addressToString(this.GetAddress());
   }
 
-  GestDescriptor() {
+  getDescriptor() {
     return this.descriptor;
   }
 
-  Sign(message) {
+  sign(message) {
     return sign(this.sk, message);
   }
 }

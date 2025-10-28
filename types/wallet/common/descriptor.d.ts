@@ -3,7 +3,7 @@ export class Descriptor {
     constructor(bytes: Uint8Array | number[]);
     bytes: Uint8Array;
     /** @returns {Uint8Array} */
-    ToBytes(): Uint8Array;
+    toBytes(): Uint8Array;
 }
 /**
  * @param {number} WalletType

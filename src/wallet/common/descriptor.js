@@ -10,7 +10,7 @@ class Descriptor {
   }
 
   /** @returns {Uint8Array} */
-  ToBytes() {
+  toBytes() {
     return this.bytes.slice();
   }
 }
