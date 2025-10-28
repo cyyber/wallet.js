@@ -10,10 +10,10 @@ class Seed {
         this._bytes = Uint8Array.from(bytes);
     }
 
-    HashSHA256() { return Uint8Array.from(sha256(this._bytes)); }
+    hashSHA256() { return Uint8Array.from(sha256(this._bytes)); }
 
     /** @param {string} hexSr */
-    static HexStrToSeed(hexStr) {
+    static hexStrToSeed(hexStr) {
         const clean = hexStr.startsWith('0x') ? hexStr.slice(2) : hexStr;
         if (clean.length !== SEED_SIZE * 2) {
             throw new Error(`hex seed must be ${SEED_SIZE * 2} hex chars`)

@@ -1,4 +1,4 @@
-function BinToMnemonic(input) {
+function binToMnemonic(input) {
   if (input.length % 3 !== 0) {
     throw new Error('byte count needs to be a multiple of 3');
   }
@@ -23,7 +23,7 @@ function BinToMnemonic(input) {
   return mnemonic;
 }
 
-function MnemonicToBin(mnemonic) {
+function mnemonicToBin(mnemonic) {
   const mnemonicWords = mnemonic.split(' ');
   const wordCount = mnemonicWords.length;
   if (wordCount % 2 !== 0) {
@@ -73,6 +73,6 @@ function MnemonicToBin(mnemonic) {
 }
 
 module.exports = { 
-  MnemonicToBin, 
-  BinToMnemonic,
+  mnemonicToBin, 
+  binToMnemonic,
 };
