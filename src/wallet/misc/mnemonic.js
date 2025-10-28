@@ -1,3 +1,5 @@
+const { WordList } = require('../../qrl/wordlist.js');
+
 function binToMnemonic(input) {
   if (input.length % 3 !== 0) {
     throw new Error('byte count needs to be a multiple of 3');
@@ -72,7 +74,7 @@ function mnemonicToBin(mnemonic) {
   return result;
 }
 
-module.exports = { 
-  mnemonicToBin, 
+module.exports = {
+  mnemonicToBin,
   binToMnemonic,
 };

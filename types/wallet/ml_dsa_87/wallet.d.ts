@@ -9,11 +9,11 @@ export class Wallet {
         pk: any;
         sk: any;
     });
-    _descriptor: any;
-    _seed: any;
-    _pk: any;
-    _sk: any;
-    _extendedSeed: any;
+    descriptor: any;
+    seed: any;
+    pk: any;
+    sk: any;
+    extendedSeed: any;
     /** @returns {Uint8Array} length 20 */
     GetAddress(): Uint8Array;
     /** @returns {string} "Q" + hex */

@@ -4,8 +4,8 @@ const { Seed } = require('./wallet/common/seed.js');
 const { Wallet } = require('./wallet/ml_dsa_87/wallet.js');
 
 module.exports = {
-  Seed: Seed,
+  Seed,
   MLDSA87: Wallet,
-  getAddressFromPKAndDescriptor: getAddressFromPKAndDescriptor,
-  DESCRIPTOR_SIZE: DESCRIPTOR_SIZE,
+  getAddressFromPKAndDescriptor,
+  DESCRIPTOR_SIZE,
 };

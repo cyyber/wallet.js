@@ -1,9 +1,13 @@
 export class Seed {
-    /** @param {string} hexSr */
-    static hexStrToSeed(hexStr: any): void;
+    /**
+     *
+     * @param {string|Uint8Array|Buffer|number[]} input
+     * @returns {Seed}
+     */
+    static from(input: string | Uint8Array | Buffer | number[]): Seed;
     /** @param {Uint8Array|number[]} bytes length 48 */
     constructor(bytes: Uint8Array | number[]);
-    _bytes: Uint8Array;
+    bytes: Uint8Array;
     hashSHA256(): Uint8Array;
 }
 //# sourceMappingURL=seed.d.ts.map

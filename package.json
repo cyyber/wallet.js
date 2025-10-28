@@ -16,7 +16,8 @@
   "dependencies": {
     "@noble/hashes": "^1.8.0",
     "@theqrl/mldsa87": "file:../qrypto.js/packages/mldsa87",
-    "randombytes": "^2.1.0"
+    "randombytes": "^2.1.0",
+    "sha3": "^2.1.4"
   },
   "directories": {
     "lib": "src",

@@ -1,1 +1,1 @@
-{"version":3,"file":"descriptor.d.ts","sourceRoot":"","sources":["../../../src/wallet/common/descriptor.js"],"names":[],"mappings":"AAEA;IACI,kDAAkD;IAClD,mBADY,UAAU,GAAC,MAAM,EAAE,EAM9B;IADG,mBAAoC;CAE3C;AAED;;;;GAIG;AACH,+DAHW,CAAC,MAAM,EAAE,MAAM,CAAC,GACd,UAAU,CAQtB"}
+{"version":3,"file":"descriptor.d.ts","sourceRoot":"","sources":["../../../src/wallet/common/descriptor.js"],"names":[],"mappings":"AAEA;IACE,kDAAkD;IAClD,mBADY,UAAU,GAAC,MAAM,EAAE,EAM9B;IADC,kBAAmC;CAEtC;AAED;;;;GAIG;AACH,+DAHW,CAAC,MAAM,EAAE,MAAM,CAAC,GACd,UAAU,CAQtB"}
