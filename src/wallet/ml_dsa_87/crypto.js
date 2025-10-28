@@ -16,7 +16,7 @@ function sign(sk, message) {
 function keygen(seed) {
   const pk = new Uint8Array(CryptoPublicKeyBytes);
   const sk = new Uint8Array(CryptoSecretKeyBytes);
-  const seedBuf = Buffer.from(seed.HashSHA256());
+  const seedBuf = Buffer.from(seed.hashSHA256());
   cryptoSignKeypair(seedBuf, pk, sk);
   return { pk, sk };
 }
