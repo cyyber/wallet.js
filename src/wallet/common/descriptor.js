@@ -8,6 +8,11 @@ class Descriptor {
     }
     this.bytes = Uint8Array.from(bytes);
   }
+
+  /** @returns {Uint8Array} */
+  ToBytes() {
+    return this.bytes.slice();
+  }
 }
 
 /**

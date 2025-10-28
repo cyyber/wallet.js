@@ -2,6 +2,8 @@ export class Descriptor {
     /** @param {Uint8Array|number[]} bytes length 3 */
     constructor(bytes: Uint8Array | number[]);
     bytes: Uint8Array;
+    /** @returns {Uint8Array} */
+    ToBytes(): Uint8Array;
 }
 /**
  * @param {number} WalletType
