@@ -1,4 +1,4 @@
-export function isUint8(input: any): boolean;
+export function isUint8(input: any): any;
 export function isHexLike(input: any): boolean;
 export function cleanHex(hex: any): any;
 export function hexToU8(hex: any): Uint8Array;
