@@ -13,7 +13,6 @@ export class Wallet {
     seed: any;
     pk: any;
     sk: any;
-    extendedSeed: any;
     /** @returns {Uint8Array} length 20 */
     getAddress(): Uint8Array;
     /** @returns {string} "Q" + hex */

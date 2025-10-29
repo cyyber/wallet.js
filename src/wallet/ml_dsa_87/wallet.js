@@ -2,7 +2,7 @@ const randomBytes = require('randombytes');
 const { mnemonicToBin } = require('../misc/mnemonic.js');
 const { unsafeGetAddress, addressToString } = require('../common/address.js');
 const { Seed } = require('../common/seed.js');
-const { ExtendedSeed } = require('../common/extended-seed.js');
+// const { ExtendedSeed } = require('../common/extended-seed.js');
 const { newMLDSA87Descriptor } = require('./descriptor.js');
 const { sign, keygen } = require('./crypto.js');
 
@@ -12,7 +12,7 @@ class Wallet {
     this.seed = seed;
     this.pk = pk;
     this.sk = sk;
-    this.extendedSeed = ExtendedSeed.NewExtendedSeed(descriptor, seed);
+    // this.extendedSeed = ExtendedSeed.newExtendedSeed(descriptor, seed);
   }
 
   static newWallet(metadata = [0, 0]) {
