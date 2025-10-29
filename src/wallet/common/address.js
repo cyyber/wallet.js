@@ -13,7 +13,7 @@ function unsafeGetAddress(pk, descriptorBytes) {
   input.set(pk, descriptorBytes.length);
 
   const hasher = new SHAKE(256);
-  hasher.update(input);
+  hasher.update(Buffer.from(input));
   const hash = hasher.digest({ buffer: Buffer.alloc(32) });
   const out = hash.slice(hash.length - ADDRESS_SIZE);
   return out;

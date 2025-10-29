@@ -58,6 +58,11 @@ class Wallet {
     return this.descriptor;
   }
 
+  /** @returns {string} hex(Seed) */
+  getHexSeed() {
+    return [...this.seed.toBytes()].map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
   sign(message) {
     return sign(this.sk, message);
   }
