@@ -51,7 +51,7 @@ class Wallet {
 
   /** @returns {string} "Q" + hex */
   getAddressStr() {
-    return addressToString(this.GetAddress());
+    return addressToString(this.getAddress());
   }
 
   getDescriptor() {
