@@ -9,5 +9,7 @@ export class Seed {
     constructor(bytes: Uint8Array | number[]);
     bytes: Uint8Array;
     hashSHA256(): Uint8Array;
+    /** @returns {Uint8Array} */
+    toBytes(): Uint8Array;
 }
 //# sourceMappingURL=seed.d.ts.map

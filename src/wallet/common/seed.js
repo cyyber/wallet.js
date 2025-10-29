@@ -15,6 +15,11 @@ class Seed {
     return Uint8Array.from(sha256(this.bytes));
   }
 
+  /** @returns {Uint8Array} */
+  toBytes() {
+    return this.bytes.slice();
+  }
+
   /**
    *
    * @param {string|Uint8Array|Buffer|number[]} input
