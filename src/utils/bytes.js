@@ -3,7 +3,9 @@ function isUint8(input) {
 }
 
 function isHexLike(input) {
-  return typeof input === 'string' && /^[0-9a-fA-F\s:_-]*$/.test(input);
+  if (typeof input !== 'string') return false;
+  const s = input.trim().replace(/^0x/i, '');
+  return /^[0-9a-fA-F\s:_-]*$/.test(s);
 }
 
 function cleanHex(hex) {
