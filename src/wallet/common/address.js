@@ -2,21 +2,27 @@
 const { SHAKE } = require('sha3');
 const { ADDRESS_SIZE, DESCRIPTOR_SIZE } = require('./constants.js');
 
+/**
+ * 
+ * @param {Uint8Array} pk 
+ * @param {Uint8Array} descriptorBytes 
+ * @returns {Uint8Array} address
+ */
 function unsafeGetAddress(pk, descriptorBytes) {
   if (!(pk instanceof Uint8Array)) throw new Error('pk must be Uint8Array');
   if (!(descriptorBytes instanceof Uint8Array) || descriptorBytes.length !== DESCRIPTOR_SIZE) {
     throw new Error(`descriptor must be ${DESCRIPTOR_SIZE} bytes`);
   }
 
-  const pkBuf = Buffer.from(pk);
-  const descBuf = Buffer.from(descriptorBytes);
-  const preimage = Buffer.concat([descBuf, pkBuf])
+  const input = new Uint8Array(descriptorBytes.length + pk.length);
+  input.set(descriptorBytes, 0);
+  input.set(pk, descriptorBytes.length);
 
-  const hasher = new SHAKE(256);
-  hasher.update(preimage);
-  const hash = hasher.digest({ buffer: Buffer.alloc(32), encoding: 'hex' });
-  const address = hash.slice(0, ADDRESS_SIZE);
-  return address;
+  const shake = new SHAKE(256);
+  shake.update(Buffer.from(input));
+  const digest = shake.digest();
+  const out = new Uint8Array(digest).slice(0, ADDRESS_SIZE);
+  return out;
 }
 
 function addressToString(addrBytes) {
