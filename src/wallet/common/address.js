@@ -8,15 +8,15 @@ function unsafeGetAddress(pk, descriptorBytes) {
     throw new Error(`descriptor must be ${DESCRIPTOR_SIZE} bytes`);
   }
 
-  const input = new Uint8Array(descriptorBytes.length + pk.length);
-  input.set(descriptorBytes, 0);
-  input.set(pk, descriptorBytes.length);
+  const pkBuf = Buffer.from(pk);
+  const descBuf = Buffer.from(descriptorBytes);
+  const preimage = Buffer.concat([descBuf, pkBuf])
 
   const hasher = new SHAKE(256);
-  hasher.update(Buffer.from(input));
-  const hash = hasher.digest({ buffer: Buffer.alloc(32) });
-  const out = hash.slice(hash.length - ADDRESS_SIZE);
-  return out;
+  hasher.update(preimage);
+  const hash = hasher.digest({ buffer: Buffer.alloc(32), encoding: 'hex' });
+  const address = hash.slice(0, ADDRESS_SIZE);
+  return address;
 }
 
 function addressToString(addrBytes) {
