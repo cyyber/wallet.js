@@ -3,9 +3,9 @@ const { SHAKE } = require('sha3');
 const { ADDRESS_SIZE, DESCRIPTOR_SIZE } = require('./constants.js');
 
 /**
- * 
- * @param {Uint8Array} pk 
- * @param {Uint8Array} descriptorBytes 
+ *
+ * @param {Uint8Array} pk
+ * @param {Uint8Array} descriptorBytes
  * @returns {Uint8Array} address
  */
 function unsafeGetAddress(pk, descriptorBytes) {
