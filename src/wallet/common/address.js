@@ -41,6 +41,7 @@ function getAddressFromPKAndDescriptor(pk, descriptor) {
 }
 
 module.exports = {
-  getAddressFromPKAndDescriptor,
+  unsafeGetAddress,
   addressToString,
+  getAddressFromPKAndDescriptor,
 };
