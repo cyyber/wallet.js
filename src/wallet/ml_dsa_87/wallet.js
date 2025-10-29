@@ -63,6 +63,11 @@ class Wallet {
     return [...this.seed.toBytes()].map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
+  /** @returns {Uint8Array} */
+  getPK() {
+    return this.pk.slice();
+  }
+
   sign(message) {
     return sign(this.sk, message);
   }

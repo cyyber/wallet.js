@@ -20,6 +20,8 @@ export class Wallet {
     getDescriptor(): any;
     /** @returns {string} hex(Seed) */
     getHexSeed(): string;
+    /** @returns {Uint8Array} */
+    getPK(): Uint8Array;
     sign(message: any): Uint8Array;
 }
 //# sourceMappingURL=wallet.d.ts.map
