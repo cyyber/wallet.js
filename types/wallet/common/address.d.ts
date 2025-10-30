@@ -1,16 +1,17 @@
 export type Descriptor = any;
 /**
- *
- * @param {Uint8Array} pk
- * @param {Uint8Array} descriptorBytes
- * @returns {Uint8Array} address
+ * Convert address bytes to string form.
+ * @param {Uint8Array} addrBytes
+ * @returns {string}
+ * @throws {Error} If length mismatch.
  */
-export function unsafeGetAddress(pk: Uint8Array, descriptorBytes: Uint8Array): Uint8Array;
-export function addressToString(addrBytes: any): string;
+export function addressToString(addrBytes: Uint8Array): string;
 /**
- *
+ * Derive an address from a public key and descriptor.
  * @param {Uint8Array} pk
  * @param {Descriptor} descriptor
+ * @returns {Uint8Array} 20-byte address.
+ * @throws {Error} If the derived address length is not `ADDRESS_SIZE`.
  */
 export function getAddressFromPKAndDescriptor(pk: Uint8Array, descriptor: any): Uint8Array;
 //# sourceMappingURL=address.d.ts.map

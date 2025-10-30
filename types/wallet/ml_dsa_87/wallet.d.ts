@@ -1,10 +1,35 @@
 export type Descriptor = import('../common/descriptor.js').Descriptor;
 export class Wallet {
-    static newWallet(metadata?: number[]): Wallet;
-    static newWalletFromSeed(seed: any, metadata?: number[]): Wallet;
-    static newWalletFromExtendedSeed(extendedSeed: any): Wallet;
-    static newWalletFromMnemonic(mnemonic: any): Wallet;
-    static verify(signature: any, message: any, pk: any): boolean;
+    /**
+     * Create a new random wallet(non-deterministic).
+     * @param {[number, number]} [metadata=[0,0] ]
+     * @returns {Wallet}
+     */
+    static newWallet(metadata?: [number, number]): Wallet;
+    /**
+     * @param {Seed} seed
+     * @param {[number, number]} [metadata=[0,0]]
+     * @returns {Wallet}
+     */
+    static newWalletFromSeed(seed: Seed, metadata?: [number, number]): Wallet;
+    /**
+     * @param {ExtendedSeed} extendedSeed
+     * @returns {Wallet}
+     */
+    static newWalletFromExtendedSeed(extendedSeed: ExtendedSeed): Wallet;
+    /**
+     * @param {string} mnemonic
+     * @returns {Wallet}
+     */
+    static newWalletFromMnemonic(mnemonic: string): Wallet;
+    /**
+     * Verify a signature.
+     * @param {Uint8Array} signature
+     * @param {Uint8Array} message
+     * @param {Uint8Array} pk
+     * @returns {boolean}
+     */
+    static verify(signature: Uint8Array, message: Uint8Array, pk: Uint8Array): boolean;
     constructor({ descriptor, seed, pk, sk }: {
         descriptor: any;
         seed: any;
@@ -16,9 +41,9 @@ export class Wallet {
     pk: any;
     sk: any;
     extendedSeed: ExtendedSeed;
-    /** @returns {Uint8Array} length 20 */
+    /** @returns {Uint8Array} */
     getAddress(): Uint8Array;
-    /** @returns {string} "Q" + hex */
+    /** @returns {string} */
     getAddressStr(): string;
     /** @returns {Descriptor} */
     getDescriptor(): Descriptor;
@@ -32,7 +57,12 @@ export class Wallet {
     getPK(): Uint8Array;
     /** @returns {Uint8Array} */
     getSK(): Uint8Array;
-    sign(message: any): Uint8Array;
+    /**
+     * Sign a message.
+     * @param {Uint8Array} message
+     * @returns {Uint8Array} Signature bytes.
+     */
+    sign(message: Uint8Array): Uint8Array;
 }
 import { ExtendedSeed } from "../common/seed.js";
 import { Seed } from "../common/seed.js";

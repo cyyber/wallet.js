@@ -5,14 +5,13 @@
  * @module wallet/common/descriptor
  */
 
-/** @typedef {import('./wallttype.js').WalletType} WalletTypeEnum */
 const { DESCRIPTOR_SIZE } = require('./constants.js');
 const { isValidWalletType } = require('./wallettype.js');
 
 class Descriptor {
   /**
-   * @param {Uint8Array|number[]} bytes must be exactly 3 bytes.
-   * @throws {Error} if size is not 3 or wallet type is invalid.
+   * @param {Uint8Array|number[]} bytes Must be exactly 3 bytes.
+   * @throws {Error} Ff size is not 3 or wallet type is invalid.
    */
   constructor(bytes) {
     if (!bytes || bytes.length !== DESCRIPTOR_SIZE) {
@@ -37,7 +36,7 @@ class Descriptor {
 /**
  * Build descriptor bytes from parts.
  * @param {number} walletType byte.
- * @param {[number, number]} [metadata=[0,0]] two metadata bytes.
+ * @param {[number, number]} [metadata=[0,0]] Two metadata bytes.
  * @returns {Uint8Array} 3 bytes.
  */
 function getDescriptorBytes(walletType, metadata = [0, 0]) {

@@ -111,7 +111,7 @@ class Wallet {
   /**
    * Sign a message.
    * @param {Uint8Array} message
-   * @returns {Uint8Array} signature bytes.
+   * @returns {Uint8Array} Signature bytes.
    */
   sign(message) {
     return sign(this.sk, message);

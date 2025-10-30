@@ -1,5 +1,5 @@
 /**
- * Generate a keypair
+ * Generate a keypair.
  * @returns {{ pk: Uint8Array, sk: Uint8Array }}
  */
 export function keygen(seed: any): {
@@ -7,14 +7,14 @@ export function keygen(seed: any): {
     sk: Uint8Array;
 };
 /**
- * Sign a message
+ * Sign a message.
  * @param {Uint8Array} sk
  * @param {Uint8Array} message
  * @returns {Uint8Array} signature
  */
 export function sign(sk: Uint8Array, message: Uint8Array): Uint8Array;
 /**
- * Verify a signature
+ * Verify a signature.
  * @param {Uint8Array} signature
  * @param {Uint8Array} message
  * @param {Uint8Array} pk

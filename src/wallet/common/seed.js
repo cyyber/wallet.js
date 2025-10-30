@@ -11,8 +11,8 @@ const { DESCRIPTOR_SIZE } = require('../../index.js');
 
 class Seed {
   /**
-   * @param {Uint8Array} bytes exactly 48 bytes.
-   * @throws {Error} if size mismatch.
+   * @param {Uint8Array} bytes Exactly 48 bytes.
+   * @throws {Error} If size mismatch.
    */
   constructor(bytes) {
     if (!bytes || bytes.length !== SEED_SIZE) {
@@ -47,8 +47,8 @@ class Seed {
 class ExtendedSeed {
   /**
    * Layout: [3 bytes descriptor] || [48 bytes seed].
-   * @param {Uint8Array} bytes exactly 51 bytes.
-   * @throws {Error} if size mismatch.
+   * @param {Uint8Array} bytes Exactly 51 bytes.
+   * @throws {Error} If size mismatch.
    */
   constructor(bytes) {
     if (!bytes || bytes.length !== EXTENDED_SEED_SIZE) {

@@ -1,14 +1,22 @@
 export class Descriptor {
-    /** @param {Uint8Array|number[]} bytes length 3 */
+    /**
+     * @param {Uint8Array|number[]} bytes Must be exactly 3 bytes.
+     * @throws {Error} Ff size is not 3 or wallet type is invalid.
+     */
     constructor(bytes: Uint8Array | number[]);
-    bytes: Uint8Array;
-    /** @returns {Uint8Array} */
+    /** @private @type {Uint8Array} */
+    private bytes;
+    /**
+     * Copy of internal bytes.
+     * @returns {Uint8Array}
+     */
     toBytes(): Uint8Array;
 }
 /**
- * @param {number} WalletType
- * @param {[number, number]} metadata
- * @returns {Uint8Array} length 3
+ * Build descriptor bytes from parts.
+ * @param {number} walletType byte.
+ * @param {[number, number]} [metadata=[0,0]] Two metadata bytes.
+ * @returns {Uint8Array} 3 bytes.
  */
-export function getDescriptorBytes(walletType: any, metadata?: [number, number]): Uint8Array;
+export function getDescriptorBytes(walletType: number, metadata?: [number, number]): Uint8Array;
 //# sourceMappingURL=descriptor.d.ts.map
