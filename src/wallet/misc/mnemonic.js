@@ -1,5 +1,15 @@
+/**
+ * Minimal mnemonic adapters.
+ * @module wallet/misc/mnemonic
+ */
+
 const { WordList } = require('../../qrl/wordlist.js');
 
+/**
+ * Encode bytes to a spaced hex mnemonic string.
+ * @param {Uint8Array} input
+ * @returns {string}
+ */
 function binToMnemonic(input) {
   if (input.length % 3 !== 0) {
     throw new Error('byte count needs to be a multiple of 3');
@@ -25,6 +35,11 @@ function binToMnemonic(input) {
   return mnemonic;
 }
 
+/**
+ * Decode spaced hex mnemonic to bytes.
+ * @param {string} mnemonic
+ * @returns {Uint8Array}
+ */
 function mnemonicToBin(mnemonic) {
   const mnemonicWords = mnemonic.split(' ');
   const wordCount = mnemonicWords.length;

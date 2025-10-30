@@ -1,3 +1,8 @@
+/**
+ * Seed(48 bytes) and ExtendedSeed(51 bytes) with constructors.
+ * @module wallet/common/seed
+ */
+
 /** @typedef {import('./common/descriptor.js').Descriptor} Descriptor */
 const { sha256 } = require('@noble/hashes/sha2.js');
 const { SEED_SIZE, EXTENDED_SEED_SIZE } = require('./constants.js');
@@ -5,7 +10,10 @@ const { toFixedU8 } = require('../../utils/bytes.js');
 const { DESCRIPTOR_SIZE } = require('../../index.js');
 
 class Seed {
-  /** @param {Uint8Array|number[]} bytes length 48 */
+  /**
+   * @param {Uint8Array} bytes exactly 48 bytes.
+   * @throws {Error} if size mismatch.
+   */
   constructor(bytes) {
     if (!bytes || bytes.length !== SEED_SIZE) {
       throw new Error(`Seed must be ${SEED_SIZE} bytes`);
@@ -18,12 +26,16 @@ class Seed {
     return Uint8Array.from(sha256(this.bytes));
   }
 
-  /** @returns {Uint8Array} */
+  /**
+   * Copy of internal seed bytes.
+   * @returns {Uint8Array}
+   */
   toBytes() {
     return this.bytes.slice();
   }
 
   /**
+   * Constructor: accepts hex string / Uint8Array / Buffer / number[].
    * @param {string|Uint8Array|Buffer|number[]} input
    * @returns {Seed}
    */
@@ -33,30 +45,42 @@ class Seed {
 }
 
 class ExtendedSeed {
+  /**
+   * Layout: [3 bytes descriptor] || [48 bytes seed].
+   * @param {Uint8Array} bytes exactly 51 bytes.
+   * @throws {Error} if size mismatch.
+   */
   constructor(bytes) {
     if (!bytes || bytes.length !== EXTENDED_SEED_SIZE) {
       throw new Error(`Seed must be ${EXTENDED_SEED_SIZE} bytes`);
     }
+    /** @private @type {Uint8Array} */
     this.bytes = Uint8Array.from(bytes);
   }
 
-  /** @returns {Uint8Array} */
+  /**
+   * @returns {Uint8Array} Descriptor(3 bytes).
+   */
   getDescriptorBytes() {
     return this.bytes.slice(0, DESCRIPTOR_SIZE);
   }
 
-  /** @returns {Uint8Array} */
+  /**
+   * @returns {Uint8Array} Seed bytes(48 bytes).
+   */
   getSeedBytes() {
     return this.bytes.slice(DESCRIPTOR_SIZE);
   }
 
-  /** @returns {Seed} */
+  /**
+   * @returns {Seed}
+   */
   getSeed() {
     return new Seed(this.getSeedBytes());
   }
 
   /**
-   *
+   * Build from components.
    * @param {Descriptor} desc
    * @param {Seed} seed
    * @returns {ExtendedSeed}
@@ -69,7 +93,7 @@ class ExtendedSeed {
   }
 
   /**
-   *
+   * Constructor: accepts hex string / Uint8Array / Buffer / number[].
    * @param {string|Uint8Array|Buffer|number[]} input
    * @returns {ExtendedSeed}
    */

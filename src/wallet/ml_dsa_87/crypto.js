@@ -1,3 +1,7 @@
+/**
+ * @module wallet/ml_dsa_87/crypto
+ */
+
 const {
   cryptoSignKeypair,
   cryptoSign,
@@ -8,7 +12,7 @@ const {
 } = require('@theqrl/mldsa87');
 
 /**
- * Generate a keypair
+ * Generate a keypair.
  * @returns {{ pk: Uint8Array, sk: Uint8Array }}
  */
 function keygen(seed) {
@@ -20,7 +24,7 @@ function keygen(seed) {
 }
 
 /**
- * Sign a message
+ * Sign a message.
  * @param {Uint8Array} sk
  * @param {Uint8Array} message
  * @returns {Uint8Array} signature
@@ -33,7 +37,7 @@ function sign(sk, message) {
 }
 
 /**
- * Verify a signature
+ * Verify a signature.
  * @param {Uint8Array} signature
  * @param {Uint8Array} message
  * @param {Uint8Array} pk
