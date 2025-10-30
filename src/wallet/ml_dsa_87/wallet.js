@@ -1,10 +1,11 @@
+/** @typedef {import('../common/descriptor.js').Descriptor} Descriptor */
 const randomBytes = require('randombytes');
+const { bytesToHex } = require('@noble/hashes/utils.js');
 const { mnemonicToBin } = require('../misc/mnemonic.js');
 const { unsafeGetAddress, addressToString } = require('../common/address.js');
-const { Seed } = require('../common/seed.js');
-// const { ExtendedSeed } = require('../common/extended-seed.js');
+const { Seed, ExtendedSeed } = require('../common/seed.js');
 const { newMLDSA87Descriptor } = require('./descriptor.js');
-const { sign, keygen } = require('./crypto.js');
+const { keygen, sign, verify } = require('./crypto.js');
 
 class Wallet {
   constructor({ descriptor, seed, pk, sk }) {
@@ -12,7 +13,7 @@ class Wallet {
     this.seed = seed;
     this.pk = pk;
     this.sk = sk;
-    // this.extendedSeed = ExtendedSeed.newExtendedSeed(descriptor, seed);
+    this.extendedSeed = ExtendedSeed.newExtendedSeed(descriptor, seed);
   }
 
   static newWallet(metadata = [0, 0]) {
@@ -30,8 +31,8 @@ class Wallet {
   }
 
   static newWalletFromExtendedSeed(extendedSeed) {
-    const descriptor = newMLDSA87Descriptor(extendedSeed.GestDescriptorBytes().slice(1));
-    const seed = extendedSeed.GetSeed();
+    const descriptor = newMLDSA87Descriptor(extendedSeed.getDescriptorBytes().slice(1));
+    const seed = extendedSeed.getSeed();
     const { pk, sk } = keygen(seed);
     return new Wallet({ descriptor, seed, pk, sk });
   }
@@ -54,13 +55,24 @@ class Wallet {
     return addressToString(this.getAddress());
   }
 
+  /** @returns {Descriptor} */
   getDescriptor() {
     return this.descriptor;
   }
 
+  /** @returns {ExtendedSeed} */
+  getExtendedSeed() {
+    return this.extendedSeed;
+  }
+
+  /** @returns {Seed} */
+  getSeed() {
+    return this.seed;
+  }
+
   /** @returns {string} hex(Seed) */
   getHexSeed() {
-    return [...this.seed.toBytes()].map((b) => b.toString(16).padStart(2, '0')).join('');
+    return bytesToHex(this.seed.toBytes());
   }
 
   /** @returns {Uint8Array} */
@@ -68,8 +80,17 @@ class Wallet {
     return this.pk.slice();
   }
 
+  /** @returns {Uint8Array} */
+  getSK() {
+    return this.sk.slice();
+  }
+
   sign(message) {
     return sign(this.sk, message);
+  }
+
+  static verify(signature, message, pk) {
+    return verify(signature, message, pk);
   }
 }
 

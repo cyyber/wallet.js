@@ -1,4 +1,4 @@
-const { hexToBytes } = require("@noble/hashes/utils");
+const { hexToBytes } = require('@noble/hashes/utils');
 
 function isUint8(input) {
   return input instanceof Uint8Array || Buffer.isBuffer(input);
