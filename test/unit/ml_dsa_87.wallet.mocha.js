@@ -2,33 +2,41 @@ const { expect } = require('chai');
 const { bytesToHex, utf8ToBytes, hexToBytes } = require('@noble/hashes/utils');
 const { walletTestCases } = require('../fixtures/ml_dsa_87.fixtures.js');
 const { ExtendedSeed } = require('../../src/wallet/common/seed.js');
-const { Wallet } = require('../../src/wallet/ml_dsa_87/wallet.js');
+const { Wallet:MLDSA87 } = require('../../src/wallet/ml_dsa_87/wallet.js');
+const Wallet = require('../../src/wallet/factory.js');
 const { DESCRIPTOR_SIZE } = require('../../src/wallet/common/constants.js');
 
 function createWalletFromSeed(tc) {
   const ext = ExtendedSeed.from(tc.extendedSeed);
   const seed = ext.getSeed();
-  return Wallet.newWalletFromSeed(seed);
+  return MLDSA87.newWalletFromSeed(seed);
 }
 
 function createWalletFromExtendedSeed(tc) {
   const ext = ExtendedSeed.from(tc.extendedSeed);
-  return Wallet.newWalletFromExtendedSeed(ext);
+  return MLDSA87.newWalletFromExtendedSeed(ext);
 }
 
 function createWalletFromMnemonic(tc) {
-  return Wallet.newWalletFromMnemonic(tc.wantMnemonic);
+  return MLDSA87.newWalletFromMnemonic(tc.wantMnemonic);
+}
+
+function createWalletFromFactory(tc) {
+  return Wallet.newWalletFromExtendedSeed(tc.extendedSeed);
 }
 
 const walletCreators = {
   FromSeed: createWalletFromSeed,
   FromExtendedSeed: createWalletFromExtendedSeed,
   FromMnemonic: createWalletFromMnemonic,
+  FromFactory: createWalletFromFactory,
 };
+
+
 
 describe('ML-DSA-87 Wallet', () => {
   it('newWallet() creates a wallet(random)', () => {
-    const w = Wallet.newWallet();
+    const w = MLDSA87.newWallet();
     expect(w).to.be.ok;
     expect(w.getPK()).to.be.instanceof(Uint8Array);
     expect(w.getSK()).to.be.instanceof(Uint8Array);
@@ -140,7 +148,7 @@ describe('ML-DSA-87 Wallet', () => {
         const sig = hexToBytes(tc.wantSignature);
         const pk = hexToBytes(tc.wantPK);
         const msg = utf8ToBytes(tc.message);
-        expect(Wallet.verify(sig, msg, pk)).to.equal(true);
+        expect(MLDSA87.verify(sig, msg, pk)).to.equal(true);
       });
     }
   });
@@ -154,24 +162,24 @@ describe('ML-DSA-87 Wallet', () => {
 
     for (const t of cases) {
       it(`newWallet - ${t.name}`, () => {
-        const w = Wallet.newWallet();
+        const w = MLDSA87.newWallet();
         const sig = w.sign(t.msg);
         const pk = w.getPK();
 
-        expect(Wallet.verify(sig, t.msg, pk)).to.equal(true);
+        expect(MLDSA87.verify(sig, t.msg, pk)).to.equal(true);
 
         // tamper message
         if (t.msg.length > 0) {
           const tampered = new Uint8Array(t.msg);
           tampered[0] ^= 0x01;
-          expect(Wallet.verify(sig, tampered, pk)).to.equal(false);
+          expect(MLDSA87.verify(sig, tampered, pk)).to.equal(false);
         }
 
         // tamper signature
         if (sig.length > 0) {
           const tampered = new Uint8Array(sig);
           tampered[0] ^= 0x01;
-          expect(Wallet.verify(tampered, t.msg, pk)).to.equal(false);
+          expect(MLDSA87.verify(tampered, t.msg, pk)).to.equal(false);
         }
       });
     }

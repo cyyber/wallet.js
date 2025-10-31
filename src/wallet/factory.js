@@ -25,7 +25,7 @@ function newWalletFromExtendedSeed(extendedSeed) {
     throw new Error('Unsupported extendedSeed input');
   }
 
-  const desc = ext.getDescriptor;
+  const desc = ext.getDescriptor();
   switch (desc.type()) {
     case WalletType.ML_DSA_87:
       return Wallet.newWalletFromExtendedSeed(ext);

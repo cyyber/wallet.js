@@ -27,7 +27,7 @@ class Descriptor {
   /**
    * @returns {number}
    */
-  walletType() {
+  type() {
     return this.bytes[0] >>> 0;
   }
 

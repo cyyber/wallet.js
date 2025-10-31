@@ -9,7 +9,7 @@ export class Descriptor {
     /**
      * @returns {number}
      */
-    walletType(): number;
+    type(): number;
     /**
      * Copy of internal bytes.
      * @returns {Uint8Array}
