@@ -3,6 +3,7 @@ const { walletTestCases } = require('../fixtures/ml_dsa_87.fixtures.js');
 const { ExtendedSeed } = require('../../src/wallet/common/seed.js');
 const { Wallet } = require('../../src/wallet/ml_dsa_87/wallet.js');
 const { DESCRIPTOR_SIZE } = require('../../src/wallet/common/constants.js');
+const { bytesToHex, utf8ToBytes, hexToBytes } = require('@noble/hashes/utils');
 
 function createWalletFromSeed(tc) {
   const ext = ExtendedSeed.from(tc.extendedSeed);
@@ -38,7 +39,7 @@ describe('ML-DSA-87 Wallet', () => {
       for (const tc of walletTestCases) {
         it(`${creatorName} - ${tc.name}`, () => {
           const w = creator(tc);
-          const got = Buffer.from(w.getSeed().toBytes()).toString('hex');
+          const got = bytesToHex(w.getSeed().toBytes());
           const want = tc.extendedSeed.slice(DESCRIPTOR_SIZE * 2);
           expect(got).to.equal(want);
         });
@@ -51,7 +52,7 @@ describe('ML-DSA-87 Wallet', () => {
       for (const tc of walletTestCases) {
         it(`${creatorName} - ${tc.name}`, () => {
           const w = creator(tc);
-          const got = Buffer.from(w.getExtendedSeed().toBytes()).toString('hex');
+          const got = bytesToHex(w.getExtendedSeed().toBytes());
           expect(got).to.equal(tc.extendedSeed);
         });
       }
@@ -85,12 +86,12 @@ describe('ML-DSA-87 Wallet', () => {
       for (const tc of walletTestCases) {
         it(`${creatorName} - PK - ${tc.name}`, () => {
           const w = creator(tc);
-          const got = Buffer.from(w.getPK()).toString('hex');
+          const got = bytesToHex(w.getPK());
           expect(got).to.equal(tc.wantPK);
         });
         it(`${creatorName} - SK - ${tc.name}`, () => {
           const w = creator(tc);
-          const got = Buffer.from(w.getSK()).toString('hex');
+          const got = bytesToHex(w.getSK());
           expect(got).to.equal(tc.wantSK);
         });
       }
@@ -102,7 +103,7 @@ describe('ML-DSA-87 Wallet', () => {
       for (const tc of walletTestCases) {
         it(`${creatorName} - ${tc.name}`, () => {
           const w = creator(tc);
-          const got = Buffer.from(w.getAddress()).toString('hex');
+          const got = bytesToHex(w.getAddress());
           expect(got).to.equal(tc.wantAddress.slice(1));
         });
       }
@@ -125,9 +126,9 @@ describe('ML-DSA-87 Wallet', () => {
       for (const tc of walletTestCases) {
         it(`${creatorName} - ${tc.name}`, () => {
           const w = creator(tc);
-          const msg = Buffer.from(tc.message, 'utf8');
+          const msg = utf8ToBytes(tc.message, 'utf8');
           const sig = w.sign(msg);
-          expect(Buffer.from(sig).toString('hex')).to.equal(tc.wantSignature);
+          expect(bytesToHex(sig)).to.equal(tc.wantSignature);
         });
       }
     }
@@ -136,9 +137,9 @@ describe('ML-DSA-87 Wallet', () => {
   describe('Verify vectors', () => {
     for (const tc of walletTestCases) {
       it(`${tc.name}`, () => {
-        const sig = Buffer.from(tc.wantSignature, 'hex');
-        const pk = Buffer.from(tc.wantPK, 'hex');
-        const msg = Buffer.from(tc.message, 'utf8');
+        const sig = hexToBytes(tc.wantSignature);
+        const pk = hexToBytes(tc.wantPK);
+        const msg = utf8ToBytes(tc.message);
         expect(Wallet.verify(sig, msg, pk)).to.equal(true);
       });
     }
@@ -146,7 +147,7 @@ describe('ML-DSA-87 Wallet', () => {
 
   describe('Sign & Verify', () => {
     const cases = [
-      { name: 'ASCII', msg: Buffer.from('test message', 'utf8') },
+      { name: 'ASCII', msg: utf8ToBytes('test message') },
       { name: 'Empty', msg: Buffer.alloc(0) },
       { name: 'Binary', msg: Uint8Array.from([1, 2, 3, 4, 5]) },
     ];
