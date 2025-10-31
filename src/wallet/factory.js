@@ -15,7 +15,7 @@ const { Wallet } = require('./ml_dsa_87/wallet.js');
  * @param {ExtendedSeed|Uint8Array|string} extendedSeed - ExtendedSeed instance, 51 bytes or hex string.
  * @returns {any} Wallet instance (ML-DSA-87 or SPHINCS+256s)
  */
-function newWalletFromExtendedSeedAuto(extendedSeed) {
+function newWalletFromExtendedSeed(extendedSeed) {
   let ext;
   if (extendedSeed instanceof Uint8Array || isHexLike(extendedSeed)) {
     ext = ExtendedSeed.from(extendedSeed);
@@ -35,5 +35,5 @@ function newWalletFromExtendedSeedAuto(extendedSeed) {
 }
 
 module.exports = {
-  newWalletFromExtendedSeedAuto,
+  newWalletFromExtendedSeed,
 };

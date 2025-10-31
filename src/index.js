@@ -8,7 +8,7 @@ const { getAddressFromPKAndDescriptor } = require('./wallet/common/address.js');
 const { ExtendedSeed } = require('./wallet/common/seed.js');
 const { newMLDSA87Descriptor } = require('./wallet/ml_dsa_87/descriptor.js');
 const { Descriptor } = require('./wallet/common/descriptor.js');
-const { newWalletFromExtendedSeedAuto } = require('./wallet/factory.js');
+const { newWalletFromExtendedSeed } = require('./wallet/factory.js');
 
 module.exports = {
   ExtendedSeed,
@@ -17,6 +17,6 @@ module.exports = {
   newMLDSA87Descriptor,
   getAddressFromPKAndDescriptor,
   Wallet: {
-    newWalletFromExtendedSeedAuto,
+    newWalletFromExtendedSeed,
   },
 };
