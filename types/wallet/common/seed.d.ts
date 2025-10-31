@@ -1,4 +1,3 @@
-export type Descriptor = any;
 export class Seed {
     /**
      * Constructor: accepts hex string / Uint8Array / Buffer / number[].

@@ -3,7 +3,6 @@
  * @module wallet/common/seed
  */
 
-/** @typedef {import('./common/descriptor.js').Descriptor} Descriptor */
 const { sha256 } = require('@noble/hashes/sha2.js');
 const { SEED_SIZE, EXTENDED_SEED_SIZE, DESCRIPTOR_SIZE } = require('./constants.js');
 const { toFixedU8 } = require('../../utils/bytes.js');
