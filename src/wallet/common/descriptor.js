@@ -25,6 +25,13 @@ class Descriptor {
   }
 
   /**
+   * @returns {number}
+   */
+  walletType() {
+    return this.bytes[0] >>> 0;
+  }
+
+  /**
    * Copy of internal bytes.
    * @returns {Uint8Array}
    */

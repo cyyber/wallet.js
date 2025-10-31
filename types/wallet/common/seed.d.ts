@@ -27,7 +27,7 @@ export class ExtendedSeed {
      * @param {Seed} seed
      * @returns {ExtendedSeed}
      */
-    static newExtendedSeed(desc: any, seed: Seed): ExtendedSeed;
+    static newExtendedSeed(desc: Descriptor, seed: Seed): ExtendedSeed;
     /**
      * Constructor: accepts hex string / Uint8Array / Buffer / number[].
      * @param {string|Uint8Array|Buffer|number[]} input
@@ -42,6 +42,10 @@ export class ExtendedSeed {
     constructor(bytes: Uint8Array);
     /** @private @type {Uint8Array} */
     private bytes;
+    /**
+     * @returns {Descriptor}
+     */
+    getDescriptor(): Descriptor;
     /**
      * @returns {Uint8Array} Descriptor(3 bytes).
      */
@@ -60,4 +64,5 @@ export class ExtendedSeed {
      */
     toBytes(): Uint8Array;
 }
+import { Descriptor } from "./descriptor.js";
 //# sourceMappingURL=seed.d.ts.map

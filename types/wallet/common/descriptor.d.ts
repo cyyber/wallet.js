@@ -7,6 +7,10 @@ export class Descriptor {
     /** @private @type {Uint8Array} */
     private bytes;
     /**
+     * @returns {number}
+     */
+    walletType(): number;
+    /**
      * Copy of internal bytes.
      * @returns {Uint8Array}
      */
