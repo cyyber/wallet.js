@@ -5,9 +5,8 @@
 
 /** @typedef {import('./common/descriptor.js').Descriptor} Descriptor */
 const { sha256 } = require('@noble/hashes/sha2.js');
-const { SEED_SIZE, EXTENDED_SEED_SIZE } = require('./constants.js');
+const { SEED_SIZE, EXTENDED_SEED_SIZE, DESCRIPTOR_SIZE } = require('./constants.js');
 const { toFixedU8 } = require('../../utils/bytes.js');
-const { DESCRIPTOR_SIZE } = require('../../index.js');
 
 class Seed {
   /**
@@ -52,7 +51,7 @@ class ExtendedSeed {
    */
   constructor(bytes) {
     if (!bytes || bytes.length !== EXTENDED_SEED_SIZE) {
-      throw new Error(`Seed must be ${EXTENDED_SEED_SIZE} bytes`);
+      throw new Error(`ExtendedSeed must be ${EXTENDED_SEED_SIZE} bytes`);
     }
     /** @private @type {Uint8Array} */
     this.bytes = Uint8Array.from(bytes);
@@ -80,6 +79,14 @@ class ExtendedSeed {
   }
 
   /**
+   * Copy of internal seed bytes.
+   * @returns {Uint8Array}
+   */
+  toBytes() {
+    return this.bytes.slice();
+  }
+
+  /**
    * Build from components.
    * @param {Descriptor} desc
    * @param {Seed} seed
@@ -98,7 +105,7 @@ class ExtendedSeed {
    * @returns {ExtendedSeed}
    */
   static from(input) {
-    return new Seed(toFixedU8(input, EXTENDED_SEED_SIZE, 'ExtendedSeed'));
+    return new ExtendedSeed(toFixedU8(input, EXTENDED_SEED_SIZE, 'ExtendedSeed'));
   }
 }
 

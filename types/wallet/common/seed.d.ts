@@ -54,5 +54,10 @@ export class ExtendedSeed {
      * @returns {Seed}
      */
     getSeed(): Seed;
+    /**
+     * Copy of internal seed bytes.
+     * @returns {Uint8Array}
+     */
+    toBytes(): Uint8Array;
 }
 //# sourceMappingURL=seed.d.ts.map

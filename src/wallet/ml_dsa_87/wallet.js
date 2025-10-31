@@ -6,8 +6,8 @@
 /** @typedef {import('../common/descriptor.js').Descriptor} Descriptor */
 const randomBytes = require('randombytes');
 const { bytesToHex } = require('@noble/hashes/utils.js');
-const { mnemonicToBin } = require('../misc/mnemonic.js');
-const { unsafeGetAddress, addressToString } = require('../common/address.js');
+const { mnemonicToBin, binToMnemonic } = require('../misc/mnemonic.js');
+const { getAddressFromPKAndDescriptor, addressToString } = require('../common/address.js');
 const { Seed, ExtendedSeed } = require('../common/seed.js');
 const { newMLDSA87Descriptor } = require('./descriptor.js');
 const { keygen, sign, verify } = require('./crypto.js');
@@ -61,16 +61,14 @@ class Wallet {
    * @returns {Wallet}
    */
   static newWalletFromMnemonic(mnemonic) {
-    const seedBytes = mnemonicToBin(mnemonic);
-    const seed = new Seed(seedBytes);
-    const descriptor = newMLDSA87Descriptor();
-    const { pk, sk } = keygen();
-    return new Wallet({ descriptor, seed, pk, sk });
+    const bin = mnemonicToBin(mnemonic);
+    const extendedSeed = new ExtendedSeed(bin);
+    return this.newWalletFromExtendedSeed(extendedSeed);
   }
 
   /** @returns {Uint8Array} */
   getAddress() {
-    return unsafeGetAddress(this.pk, this.descriptor.toBytes());
+    return getAddressFromPKAndDescriptor(this.pk, this.descriptor);
   }
 
   /** @returns {string} */
@@ -93,9 +91,14 @@ class Wallet {
     return this.seed;
   }
 
-  /** @returns {string} hex(Seed) */
-  getHexSeed() {
-    return bytesToHex(this.seed.toBytes());
+  /** @returns {string} hex(ExtendedSeed) */
+  getHexExtendedSeed() {
+    return `0x${bytesToHex(this.extendedSeed.toBytes())}`;
+  }
+
+  /** @returns {string} */
+  getMnemonic() {
+    return binToMnemonic(this.getExtendedSeed().toBytes());
   }
 
   /** @returns {Uint8Array} */

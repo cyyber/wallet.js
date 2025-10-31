@@ -51,8 +51,10 @@ export class Wallet {
     getExtendedSeed(): ExtendedSeed;
     /** @returns {Seed} */
     getSeed(): Seed;
-    /** @returns {string} hex(Seed) */
-    getHexSeed(): string;
+    /** @returns {string} hex(ExtendedSeed) */
+    getHexExtendedSeed(): string;
+    /** @returns {string} */
+    getMnemonic(): string;
     /** @returns {Uint8Array} */
     getPK(): Uint8Array;
     /** @returns {Uint8Array} */
