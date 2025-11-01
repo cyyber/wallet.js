@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { bytesToHex, utf8ToBytes, hexToBytes } = require('@noble/hashes/utils');
 const { walletTestCases } = require('../fixtures/ml_dsa_87.fixtures.js');
 const { ExtendedSeed } = require('../../src/wallet/common/seed.js');
-const { Wallet:MLDSA87 } = require('../../src/wallet/ml_dsa_87/wallet.js');
+const { Wallet: MLDSA87 } = require('../../src/wallet/ml_dsa_87/wallet.js');
 const Wallet = require('../../src/wallet/factory.js');
 const { DESCRIPTOR_SIZE } = require('../../src/wallet/common/constants.js');
 
@@ -31,8 +31,6 @@ const walletCreators = {
   FromMnemonic: createWalletFromMnemonic,
   FromFactory: createWalletFromFactory,
 };
-
-
 
 describe('ML-DSA-87 Wallet', () => {
   it('newWallet() creates a wallet(random)', () => {

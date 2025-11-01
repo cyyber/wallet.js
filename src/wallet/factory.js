@@ -4,6 +4,7 @@
  * @module wallet/factory
  */
 
+/** @typedef {import('('../types/qrl-wallet.js').QRLWallet} QRLWallet */
 const { isHexLike } = require('../utils/bytes.js');
 const { ExtendedSeed } = require('./common/seed.js');
 const { WalletType } = require('./common/wallettype.js');
@@ -13,7 +14,7 @@ const { Wallet } = require('./ml_dsa_87/wallet.js');
  * Construct a wallet from an ExtendedSeed by auto-selecting the correct implementation.
  *
  * @param {ExtendedSeed|Uint8Array|string} extendedSeed - ExtendedSeed instance, 51 bytes or hex string.
- * @returns {any} Wallet instance (ML-DSA-87 or SPHINCS+256s)
+ * @returns {QRLWallet} Wallet instance (ML-DSA-87 or SPHINCS+256s)
  */
 function newWalletFromExtendedSeed(extendedSeed) {
   let ext;

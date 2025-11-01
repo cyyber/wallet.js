@@ -1,5 +1,6 @@
 export type Descriptor = import('../common/descriptor.js').Descriptor;
-export class Wallet {
+/** @implements {QRLWallet} */
+export class Wallet implements QRLWallet {
     /**
      * Create a new random wallet(non-deterministic).
      * @param {[number, number]} [metadata=[0,0] ]
