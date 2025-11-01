@@ -1,3 +1,4 @@
+export type QRLWallet = import('../../types/qrl-wallet.js').QRLWallet;
 export type Descriptor = import('../common/descriptor.js').Descriptor;
 /** @implements {QRLWallet} */
 export class Wallet implements QRLWallet {

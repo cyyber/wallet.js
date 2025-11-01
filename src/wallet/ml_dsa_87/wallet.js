@@ -3,7 +3,7 @@
  * @module wallet/ml_dsa_87/wallet
  */
 
-/** @typedef {import('('../../types/qrl-wallet.js').QRLWallet} QRLWallet */
+/** @typedef {import('../../types/qrl-wallet.js').QRLWallet} QRLWallet */
 /** @typedef {import('../common/descriptor.js').Descriptor} Descriptor */
 const randomBytes = require('randombytes');
 const { bytesToHex } = require('@noble/hashes/utils.js');
