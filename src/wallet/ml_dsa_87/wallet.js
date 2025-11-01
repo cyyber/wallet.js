@@ -3,7 +3,6 @@
  * @module wallet/ml_dsa_87/wallet
  */
 
-/** @typedef {import('../../types/qrl-wallet.js').QRLWallet} QRLWallet */
 /** @typedef {import('../common/descriptor.js').Descriptor} Descriptor */
 const randomBytes = require('randombytes');
 const { bytesToHex } = require('@noble/hashes/utils.js');
@@ -13,7 +12,6 @@ const { Seed, ExtendedSeed } = require('../common/seed.js');
 const { newMLDSA87Descriptor } = require('./descriptor.js');
 const { keygen, sign, verify } = require('./crypto.js');
 
-/** @implements {QRLWallet} */
 class Wallet {
   constructor({ descriptor, seed, pk, sk }) {
     this.descriptor = descriptor;

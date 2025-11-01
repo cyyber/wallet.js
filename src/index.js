@@ -5,7 +5,6 @@
 
 /** @typedef {import('./wallet/ml_dsa_87/wallet.js').Wallet} MLDSA87Type */
 /** @typedef {import('./wallet/sphincsplus_256s/wallet.js').Wallet} SPHINCSPLUS256sType */
-/** @typedef {import('./types/qrl-wallet.js').QRLWallet} QRLWallet */
 
 const { DESCRIPTOR_SIZE } = require('./wallet/common/constants.js');
 const { getAddressFromPKAndDescriptor } = require('./wallet/common/address.js');
@@ -19,7 +18,7 @@ const { Wallet: SPHINCSPLUS256s } = require('./wallet/sphincsplus_256s/wallet.js
 /**
  * Public Wallet namespace.
  * @type{{
- *  newWalletFromExtendedSeed(ext: string | Uint8Array | ExtendedSeed): QRLWallet;
+ *  newWalletFromExtendedSeed(ext: string | Uint8Array | ExtendedSeed): any;
  *  MLDSA87: MLDSA87Type,
  *  SPHINCSPLUS256s: SPHINCSPLUS256sType,
  * }}

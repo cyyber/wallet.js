@@ -1,7 +1,5 @@
-export type QRLWallet = import('../../types/qrl-wallet.js').QRLWallet;
 export type Descriptor = import('../common/descriptor.js').Descriptor;
-/** @implements {QRLWallet} */
-export class Wallet implements QRLWallet {
+export class Wallet {
     /**
      * Create a new random wallet(non-deterministic).
      * @param {[number, number]} [metadata=[0,0] ]

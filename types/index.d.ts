@@ -1,6 +1,5 @@
 export type MLDSA87Type = import('./wallet/ml_dsa_87/wallet.js').Wallet;
 export type SPHINCSPLUS256sType = import('./wallet/sphincsplus_256s/wallet.js').Wallet;
-export type QRLWallet = import('./types/qrl-wallet.js').QRLWallet;
 import { ExtendedSeed } from "./wallet/common/seed.js";
 import { Descriptor } from "./wallet/common/descriptor.js";
 import { DESCRIPTOR_SIZE } from "./wallet/common/constants.js";
@@ -9,13 +8,13 @@ import { getAddressFromPKAndDescriptor } from "./wallet/common/address.js";
 /**
  * Public Wallet namespace.
  * @type{{
- *  newWalletFromExtendedSeed(ext: string | Uint8Array | ExtendedSeed): QRLWallet;
+ *  newWalletFromExtendedSeed(ext: string | Uint8Array | ExtendedSeed): any;
  *  MLDSA87: MLDSA87Type,
  *  SPHINCSPLUS256s: SPHINCSPLUS256sType,
  * }}
  */
 export const Wallet: {
-    newWalletFromExtendedSeed(ext: string | Uint8Array | ExtendedSeed): QRLWallet;
+    newWalletFromExtendedSeed(ext: string | Uint8Array | ExtendedSeed): any;
     MLDSA87: MLDSA87Type;
     SPHINCSPLUS256s: SPHINCSPLUS256sType;
 };

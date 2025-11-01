@@ -1,6 +1,3 @@
-/** @typedef {import('../../types/qrl-wallet.js').QRLWallet} QRLWallet */
-
-/** @implements {QRLWallet} */
 class Wallet {
   /** @returns {Uint8Array} */ getAddress() {
     throw new Error();
