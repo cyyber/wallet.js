@@ -13,7 +13,6 @@ const { Wallet: MLDSA87 } = require('./wallet/ml_dsa_87/wallet.js');
 
 const Wallet = {
   newWalletFromExtendedSeed,
-  MLDSA87,
 }
 
 module.exports = {
@@ -22,5 +21,6 @@ module.exports = {
   DESCRIPTOR_SIZE,
   newMLDSA87Descriptor,
   getAddressFromPKAndDescriptor,
+  MLDSA87,
   Wallet,
 };
