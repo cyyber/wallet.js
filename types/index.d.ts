@@ -3,6 +3,7 @@ import { Descriptor } from "./wallet/common/descriptor.js";
 import { DESCRIPTOR_SIZE } from "./wallet/common/constants.js";
 import { newMLDSA87Descriptor } from "./wallet/ml_dsa_87/descriptor.js";
 import { getAddressFromPKAndDescriptor } from "./wallet/common/address.js";
+import { WalletType } from "./wallet/common/wallettype.js";
 import { newWalletFromExtendedSeed } from "./wallet/factory.js";
 import { Wallet as MLDSA87 } from "./wallet/ml_dsa_87/wallet.js";
 import { Wallet as SPHINCSPLUS256s } from "./wallet/sphincsplus_256s/wallet.js";
@@ -11,5 +12,5 @@ export declare namespace Wallet {
     export { MLDSA87 };
     export { SPHINCSPLUS256s };
 }
-export { ExtendedSeed, Descriptor, DESCRIPTOR_SIZE, newMLDSA87Descriptor, getAddressFromPKAndDescriptor };
+export { ExtendedSeed, Descriptor, DESCRIPTOR_SIZE, newMLDSA87Descriptor, getAddressFromPKAndDescriptor, WalletType };
 //# sourceMappingURL=index.d.ts.map
