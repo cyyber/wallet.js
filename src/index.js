@@ -3,9 +3,6 @@
  * @module index
  */
 
-/** @typedef {import('./wallet/ml_dsa_87/wallet.js').Wallet} MLDSA87Type */
-/** @typedef {import('./wallet/sphincsplus_256s/wallet.js').Wallet} SPHINCSPLUS256sType */
-
 const { DESCRIPTOR_SIZE } = require('./wallet/common/constants.js');
 const { getAddressFromPKAndDescriptor } = require('./wallet/common/address.js');
 const { ExtendedSeed } = require('./wallet/common/seed.js');

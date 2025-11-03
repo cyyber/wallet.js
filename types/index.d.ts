@@ -1,5 +1,3 @@
-export type MLDSA87Type = import('./wallet/ml_dsa_87/wallet.js').Wallet;
-export type SPHINCSPLUS256sType = import('./wallet/sphincsplus_256s/wallet.js').Wallet;
 import { ExtendedSeed } from "./wallet/common/seed.js";
 import { Descriptor } from "./wallet/common/descriptor.js";
 import { DESCRIPTOR_SIZE } from "./wallet/common/constants.js";
