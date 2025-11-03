@@ -13,21 +13,7 @@ const { newMLDSA87Descriptor } = require('./wallet/ml_dsa_87/descriptor.js');
 const { Descriptor } = require('./wallet/common/descriptor.js');
 const { newWalletFromExtendedSeed } = require('./wallet/factory.js');
 const { Wallet: MLDSA87 } = require('./wallet/ml_dsa_87/wallet.js');
-const { Wallet: SPHINCSPLUS256s } = require('./wallet/sphincsplus_256s/wallet.js');
-
-/**
- * Public Wallet namespace.
- * @type{{
- *  newWalletFromExtendedSeed(ext: string | Uint8Array | ExtendedSeed): any;
- *  MLDSA87: MLDSA87Type,
- *  SPHINCSPLUS256s: SPHINCSPLUS256sType,
- * }}
- */
-const Wallet = {
-  newWalletFromExtendedSeed,
-  MLDSA87,
-  SPHINCSPLUS256s,
-};
+const { Wallet: SPHINCSPLUS256s } = require('./wallet/sphincsplus_256s/wallet.js'); 
 
 module.exports = {
   ExtendedSeed,
@@ -35,5 +21,9 @@ module.exports = {
   DESCRIPTOR_SIZE,
   newMLDSA87Descriptor,
   getAddressFromPKAndDescriptor,
-  Wallet,
+  Wallet: {
+    newWalletFromExtendedSeed,
+    MLDSA87,
+    SPHINCSPLUS256s,
+  },
 };
