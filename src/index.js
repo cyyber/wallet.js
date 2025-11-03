@@ -10,7 +10,6 @@ const { newMLDSA87Descriptor } = require('./wallet/ml_dsa_87/descriptor.js');
 const { Descriptor } = require('./wallet/common/descriptor.js');
 const { newWalletFromExtendedSeed } = require('./wallet/factory.js');
 const { Wallet: MLDSA87 } = require('./wallet/ml_dsa_87/wallet.js');
-const { Wallet: SPHINCSPLUS256s } = require('./wallet/sphincsplus_256s/wallet.js'); 
 const { WalletType } = require('./wallet/common/wallettype.js');
 
 module.exports = {
@@ -23,6 +22,5 @@ module.exports = {
   Wallet: {
     newWalletFromExtendedSeed,
     MLDSA87,
-    SPHINCSPLUS256s,
   },
 };
