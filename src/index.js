@@ -5,7 +5,7 @@
 
 const { DESCRIPTOR_SIZE } = require('./wallet/common/constants.js');
 const { getAddressFromPKAndDescriptor } = require('./wallet/common/address.js');
-const { ExtendedSeed } = require('./wallet/common/seed.js');
+const { ExtendedSeed, Seed } = require('./wallet/common/seed.js');
 const { newMLDSA87Descriptor } = require('./wallet/ml_dsa_87/descriptor.js');
 const { Descriptor } = require('./wallet/common/descriptor.js');
 const { newWalletFromExtendedSeed } = require('./wallet/factory.js');
@@ -13,6 +13,7 @@ const { Wallet: MLDSA87 } = require('./wallet/ml_dsa_87/wallet.js');
 const { WalletType } = require('./wallet/common/wallettype.js');
 
 module.exports = {
+  Seed,
   ExtendedSeed,
   Descriptor,
   DESCRIPTOR_SIZE,

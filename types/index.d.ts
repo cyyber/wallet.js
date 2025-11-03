@@ -1,3 +1,4 @@
+import { Seed } from "./wallet/common/seed.js";
 import { ExtendedSeed } from "./wallet/common/seed.js";
 import { Descriptor } from "./wallet/common/descriptor.js";
 import { DESCRIPTOR_SIZE } from "./wallet/common/constants.js";
@@ -10,5 +11,5 @@ export declare namespace Wallet {
     export { newWalletFromExtendedSeed };
     export { MLDSA87 };
 }
-export { ExtendedSeed, Descriptor, DESCRIPTOR_SIZE, newMLDSA87Descriptor, getAddressFromPKAndDescriptor, WalletType };
+export { Seed, ExtendedSeed, Descriptor, DESCRIPTOR_SIZE, newMLDSA87Descriptor, getAddressFromPKAndDescriptor, WalletType };
 //# sourceMappingURL=index.d.ts.map
