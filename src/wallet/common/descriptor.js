@@ -1,5 +1,5 @@
 /**
- * 3-byte descriptorfor a wallet:
+ * 3-byte descriptor for a wallet:
  *  - byte 0: wallet type (e.g. ML_DSA_87)
  *  - bytes 1..2: 2 bytes metadata
  * @module wallet/common/descriptor

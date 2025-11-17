@@ -1,7 +1,5 @@
 /**
  * Address helpers.
- * Address = FIRST 20 bytes of SHAKE256( descriptor_bytes || public_key ).
- * String form: "Q" + hex(address).
  * @module wallet/common/address
  */
 

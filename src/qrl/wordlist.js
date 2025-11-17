@@ -1,6 +1,6 @@
 /**
  * Mnemonic word list used by encoding/decoding utilities.
- * @module misc/wordlist
+ * @module qrl/wordlist
  */
 
 /**
