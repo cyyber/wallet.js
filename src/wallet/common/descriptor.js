@@ -7,6 +7,7 @@
 
 const { DESCRIPTOR_SIZE } = require('./constants.js');
 const { isValidWalletType } = require('./wallettype.js');
+const { toFixedU8 } = require('../../utils/bytes.js');
 
 class Descriptor {
   /**
@@ -37,6 +38,15 @@ class Descriptor {
    */
   toBytes() {
     return this.bytes.slice();
+  }
+
+  /**
+   * Constructor: accepts hex string / Uint8Array / Buffer / number[].
+   * @param {string|Uint8Array|Buffer|number[]} input
+   * @returns {ExtendedSeed}
+   */
+  static from(input) {
+    return new Descriptor(toFixedU8(input, DESCRIPTOR_SIZE, 'Descriptor'));
   }
 }
 
