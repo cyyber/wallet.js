@@ -43,7 +43,7 @@ class Descriptor {
   /**
    * Constructor: accepts hex string / Uint8Array / Buffer / number[].
    * @param {string|Uint8Array|Buffer|number[]} input
-   * @returns {ExtendedSeed}
+   * @returns {Descriptor}
    */
   static from(input) {
     return new Descriptor(toFixedU8(input, DESCRIPTOR_SIZE, 'Descriptor'));

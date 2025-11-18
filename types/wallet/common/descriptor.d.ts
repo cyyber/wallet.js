@@ -2,9 +2,9 @@ export class Descriptor {
     /**
      * Constructor: accepts hex string / Uint8Array / Buffer / number[].
      * @param {string|Uint8Array|Buffer|number[]} input
-     * @returns {ExtendedSeed}
+     * @returns {Descriptor}
      */
-    static from(input: string | Uint8Array | Buffer | number[]): ExtendedSeed;
+    static from(input: string | Uint8Array | Buffer | number[]): Descriptor;
     /**
      * @param {Uint8Array|number[]} bytes Must be exactly 3 bytes.
      * @throws {Error} Ff size is not 3 or wallet type is invalid.
