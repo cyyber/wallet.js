@@ -17,7 +17,7 @@ const WalletType = Object.freeze({
  * @return {boolean}
  */
 function isValidWalletType(t) {
-  return t === WalletType.ML_DSA_87 || t === WalletType.SPHINCSPLUS_256S;
+  return t === WalletType.ML_DSA_87;
 }
 
 module.exports = {
