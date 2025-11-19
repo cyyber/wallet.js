@@ -8,18 +8,20 @@ const { getAddressFromPKAndDescriptor } = require('./wallet/common/address.js');
 const { ExtendedSeed, Seed } = require('./wallet/common/seed.js');
 const { newMLDSA87Descriptor } = require('./wallet/ml_dsa_87/descriptor.js');
 const { Descriptor } = require('./wallet/common/descriptor.js');
-const { newWalletFromExtendedSeed: fromExtendedSeed } = require('./wallet/factory.js');
+const { newWalletFromExtendedSeed } = require('./wallet/factory.js');
 const { Wallet: MLDSA87 } = require('./wallet/ml_dsa_87/wallet.js');
 const { WalletType } = require('./wallet/common/wallettype.js');
 
 module.exports = {
-  Seed, SEED_SIZE,
-  ExtendedSeed, EXTENDED_SEED_SIZE,
-  Descriptor, DESCRIPTOR_SIZE, newMLDSA87Descriptor,
+  Seed,
+  SEED_SIZE,
+  ExtendedSeed,
+  EXTENDED_SEED_SIZE,
+  Descriptor,
+  DESCRIPTOR_SIZE,
+  newMLDSA87Descriptor,
   getAddressFromPKAndDescriptor,
   WalletType,
-  Wallet: {
-    fromExtendedSeed,
-    MLDSA87,
-  },
+  newWalletFromExtendedSeed,
+  MLDSA87,
 };

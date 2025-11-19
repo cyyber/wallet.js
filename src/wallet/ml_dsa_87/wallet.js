@@ -56,7 +56,7 @@ class Wallet {
   static newWalletFromExtendedSeed(extendedSeed) {
     const descriptor = extendedSeed.getDescriptor();
     if (descriptor.type() !== WalletType.ML_DSA_87) {
-      throw new Error('Extended seed descriptor is not ML-DSA-87')
+      throw new Error('Extended seed descriptor is not ML-DSA-87');
     }
     const seed = extendedSeed.getSeed();
     const { pk, sk } = keygen(seed);

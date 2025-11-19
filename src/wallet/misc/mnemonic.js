@@ -19,20 +19,20 @@ function binToMnemonic(input) {
   if (input.length % 3 !== 0) {
     throw new Error('byte count needs to be a multiple of 3');
   }
-  
+
   const words = [];
   for (let nibble = 0; nibble < input.length * 2; nibble += 3) {
     const p = nibble >> 1;
     const b1 = input[p];
     const b2 = p + 1 < input.length ? input[p + 1] : 0;
-    const idx = nibble % 2 === 0 ? (b1 << 4) + (b2 >> 4) : ((b1 & 0x0f) << 8) + b2
+    const idx = nibble % 2 === 0 ? (b1 << 4) + (b2 >> 4) : ((b1 & 0x0f) << 8) + b2;
 
     if (idx >= WordList.length) {
       throw new Error('mnemonic index out of range');
     }
     words.push(WordList[idx]);
   }
-  
+
   return words.join(' ');
 }
 
@@ -50,7 +50,8 @@ function mnemonicToBin(mnemonic) {
   let buffering = 0;
   let resultIndex = 0;
 
-  for (const w of mnemonicWords) {
+  for (let i = 0; i < mnemonicWords.length; i += 1) {
+    const w = mnemonicWords[i];
     const value = WORD_LOOKUP[w];
     if (value === undefined) throw new Error('invalid word in mnemonic');
 
@@ -69,7 +70,7 @@ function mnemonicToBin(mnemonic) {
   if (buffering > 0) {
     result[resultIndex++] = current & 0xff;
   }
-  
+
   return result;
 }
 
