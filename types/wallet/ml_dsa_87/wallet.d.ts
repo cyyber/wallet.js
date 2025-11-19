@@ -30,16 +30,19 @@ export class Wallet {
      * @returns {boolean}
      */
     static verify(signature: Uint8Array, message: Uint8Array, pk: Uint8Array): boolean;
+    /**
+     * @param {{descriptor: Descriptor, seed: Seed, pk: Uint8Array, sk: Uint8Array}} opts
+     */
     constructor({ descriptor, seed, pk, sk }: {
-        descriptor: any;
-        seed: any;
-        pk: any;
-        sk: any;
+        descriptor: Descriptor;
+        seed: Seed;
+        pk: Uint8Array;
+        sk: Uint8Array;
     });
-    descriptor: any;
-    seed: any;
-    pk: any;
-    sk: any;
+    descriptor: import("../common/descriptor.js").Descriptor;
+    seed: Seed;
+    pk: Uint8Array;
+    sk: Uint8Array;
     extendedSeed: ExtendedSeed;
     /** @returns {Uint8Array} */
     getAddress(): Uint8Array;
@@ -66,6 +69,6 @@ export class Wallet {
      */
     sign(message: Uint8Array): Uint8Array;
 }
-import { ExtendedSeed } from "../common/seed.js";
 import { Seed } from "../common/seed.js";
+import { ExtendedSeed } from "../common/seed.js";
 //# sourceMappingURL=wallet.d.ts.map

@@ -14,6 +14,9 @@ const { keygen, sign, verify } = require('./crypto.js');
 const { WalletType } = require('../common/wallettype.js');
 
 class Wallet {
+  /**
+   * @param {{descriptor: Descriptor, seed: Seed, pk: Uint8Array, sk: Uint8Array}} opts
+   */
   constructor({ descriptor, seed, pk, sk }) {
     this.descriptor = descriptor;
     this.seed = seed;
