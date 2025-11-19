@@ -7,7 +7,7 @@
 const { isHexLike } = require('../utils/bytes.js');
 const { ExtendedSeed } = require('./common/seed.js');
 const { WalletType } = require('./common/wallettype.js');
-const { Wallet } = require('./ml_dsa_87/wallet.js');
+const { Wallet: MLDSA87 } = require('./ml_dsa_87/wallet.js');
 
 /**
  * Construct a wallet from an ExtendedSeed by auto-selecting the correct implementation.
@@ -28,7 +28,7 @@ function newWalletFromExtendedSeed(extendedSeed) {
   const desc = ext.getDescriptor();
   switch (desc.type()) {
     case WalletType.ML_DSA_87:
-      return Wallet.newWalletFromExtendedSeed(ext);
+      return MLDSA87.newWalletFromExtendedSeed(ext);
     default:
       throw new Error(`Unsupported wallet type in descriptor: ${desc.type()}`);
   }
