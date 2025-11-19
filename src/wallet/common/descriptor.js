@@ -60,7 +60,7 @@ function getDescriptorBytes(walletType, metadata = [0, 0]) {
   const out = new Uint8Array(DESCRIPTOR_SIZE);
   out[0] = walletType >>> 0;
   out[1] = (metadata?.[0] ?? 0) >>> 0;
-  out[1] = (metadata?.[1] ?? 0) >>> 0;
+  out[2] = (metadata?.[1] ?? 0) >>> 0;
   return out;
 }
 

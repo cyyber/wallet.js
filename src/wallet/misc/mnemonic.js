@@ -5,6 +5,11 @@
 
 const { WordList } = require('../../qrl/wordlist.js');
 
+const WORD_LOOKUP = WordList.reduce((acc, word, i) => {
+  acc[word] = i;
+  return acc;
+}, Object.create(null));
+
 /**
  * Encode bytes to a spaced hex mnemonic string.
  * @param {Uint8Array} input
@@ -14,25 +19,21 @@ function binToMnemonic(input) {
   if (input.length % 3 !== 0) {
     throw new Error('byte count needs to be a multiple of 3');
   }
-  let mnemonic = '';
-  let separator = '';
+  
+  const words = [];
   for (let nibble = 0; nibble < input.length * 2; nibble += 3) {
     const p = nibble >> 1;
     const b1 = input[p];
-    let b2 = 0;
-    if (p + 1 < input.length) {
-      b2 = input[p + 1];
+    const b2 = p + 1 < input.length ? input[p + 1] : 0;
+    const idx = nibble % 2 === 0 ? (b1 << 4) + (b2 >> 4) : ((b1 & 0x0f) << 8) + b2
+
+    if (idx >= WordList.length) {
+      throw new Error('mnemonic index out of range');
     }
-    let idx = 0;
-    if (nibble % 2 === 0) {
-      idx = (b1 << 4) + (b2 >> 4);
-    } else {
-      idx = ((b1 & 0x0f) << 8) + b2;
-    }
-    mnemonic += separator + WordList[idx];
-    separator = ' ';
+    words.push(WordList[idx]);
   }
-  return mnemonic;
+  
+  return words.join(' ');
 }
 
 /**
@@ -41,51 +42,34 @@ function binToMnemonic(input) {
  * @returns {Uint8Array}
  */
 function mnemonicToBin(mnemonic) {
-  const mnemonicWords = mnemonic.split(' ');
-  const wordCount = mnemonicWords.length;
-  if (wordCount % 2 !== 0) {
-    throw new Error('word count must be even');
-  }
+  const mnemonicWords = mnemonic.trim().toLowerCase().split(/\s+/);
+  if (mnemonicWords.length % 2 !== 0) throw new Error('word count must be even');
 
-  const wordLookup = {};
-  WordList.map((word, i) => {
-    wordLookup[word] = i;
-    return word;
-  });
-
-  const result = new Uint8Array((wordCount * 15) / 10);
-
+  const result = new Uint8Array((mnemonicWords.length * 15) / 10);
   let current = 0;
   let buffering = 0;
   let resultIndex = 0;
 
-  mnemonicWords.map((w) => {
-    const value = wordLookup[w];
-    if (value === undefined || value === null) {
-      throw new Error('invalid word in mnemonic');
-    }
+  for (const w of mnemonicWords) {
+    const value = WORD_LOOKUP[w];
+    if (value === undefined) throw new Error('invalid word in mnemonic');
 
     buffering += 3;
     current = (current << 12) + value;
-    let shift;
-    let mask;
-    let tmp;
     for (; buffering > 2; ) {
-      shift = 4 * (buffering - 2);
-      mask = (1 << shift) - 1;
-      tmp = current >> shift;
+      const shift = 4 * (buffering - 2);
+      const mask = (1 << shift) - 1;
+      const tmp = current >> shift;
       buffering -= 2;
       current &= mask;
-      result[resultIndex] = tmp;
-      resultIndex++;
+      result[resultIndex++] = tmp;
     }
-    return w;
-  });
+  }
 
   if (buffering > 0) {
-    result[resultIndex] = current & 0xff;
-    resultIndex++;
+    result[resultIndex++] = current & 0xff;
   }
+  
   return result;
 }
 
