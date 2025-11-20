@@ -7,6 +7,7 @@ const { sha256 } = require('@noble/hashes/sha2.js');
 const { SEED_SIZE, EXTENDED_SEED_SIZE, DESCRIPTOR_SIZE } = require('./constants.js');
 const { toFixedU8 } = require('../../utils/bytes.js');
 const { Descriptor } = require('./descriptor.js');
+const { isValidWalletType } = require('./wallettype.js');
 
 class Seed {
   /**
@@ -55,6 +56,9 @@ class ExtendedSeed {
     }
     /** @private @type {Uint8Array} */
     this.bytes = Uint8Array.from(bytes);
+    if (!isValidWalletType(this.bytes[0])) {
+      throw new Error('Invalid wallet type in descriptor');
+    }
   }
 
   /**
