@@ -11,7 +11,6 @@ const { getAddressFromPKAndDescriptor, addressToString } = require('../common/ad
 const { Seed, ExtendedSeed } = require('../common/seed.js');
 const { newMLDSA87Descriptor } = require('./descriptor.js');
 const { keygen, sign, verify } = require('./crypto.js');
-const { WalletType } = require('../common/wallettype.js');
 
 class Wallet {
   /**
