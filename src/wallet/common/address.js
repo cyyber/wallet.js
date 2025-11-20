@@ -5,7 +5,7 @@
 
 /** @typedef {import('./common/descriptor.js').Descriptor} Descriptor */
 const { SHAKE } = require('sha3');
-const { ADDRESS_SIZE, DESCRIPTOR_SIZE } = require('./constants.js');
+const { ADDRESS_SIZE } = require('./constants.js');
 
 /**
  * Convert address bytes to string form.
@@ -31,14 +31,10 @@ function addressToString(addrBytes) {
 function getAddressFromPKAndDescriptor(pk, descriptor) {
   if (!(pk instanceof Uint8Array)) throw new Error('pk must be Uint8Array');
 
-  const descriptorBytes = descriptor.toBytes();
-  if (!(descriptorBytes instanceof Uint8Array) || descriptorBytes.length !== DESCRIPTOR_SIZE) {
-    throw new Error(`descriptor must be ${DESCRIPTOR_SIZE} bytes`);
-  }
-
-  const input = new Uint8Array(descriptorBytes.length + pk.length);
-  input.set(descriptorBytes, 0);
-  input.set(pk, descriptorBytes.length);
+  const descBytes = descriptor.toBytes();
+  const input = new Uint8Array(descBytes.length + pk.length);
+  input.set(descBytes, 0);
+  input.set(pk, descBytes.length);
 
   const shake = new SHAKE(256);
   shake.update(Buffer.from(input));

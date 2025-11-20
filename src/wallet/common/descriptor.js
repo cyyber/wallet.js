@@ -57,6 +57,9 @@ class Descriptor {
  * @returns {Uint8Array} 3 bytes.
  */
 function getDescriptorBytes(walletType, metadata = [0, 0]) {
+  if (!isValidWalletType(walletType)) {
+    throw new Error('Invalid wallet type in descriptor');
+  }
   const out = new Uint8Array(DESCRIPTOR_SIZE);
   out[0] = walletType >>> 0;
   out[1] = (metadata?.[0] ?? 0) >>> 0;
