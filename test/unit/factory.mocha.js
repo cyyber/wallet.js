@@ -4,7 +4,6 @@ const { newWalletFromExtendedSeed } = require('../../src/wallet/factory.js');
 const { walletTestCases } = require('../fixtures/ml_dsa_87.fixtures.js');
 const { Wallet: MLDSA87 } = require('../../src/wallet/ml_dsa_87/wallet.js');
 const { ExtendedSeed } = require('../../src/wallet/common/seed.js');
-const { EXTENDED_SEED_SIZE } = require('../../src/wallet/common/constants.js');
 
 describe('wallet/factory', () => {
   const tc = walletTestCases[0];

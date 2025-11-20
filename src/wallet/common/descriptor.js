@@ -12,7 +12,7 @@ const { toFixedU8 } = require('../../utils/bytes.js');
 class Descriptor {
   /**
    * @param {Uint8Array|number[]} bytes Must be exactly 3 bytes.
-   * @throws {Error} Ff size is not 3 or wallet type is invalid.
+   * @throws {Error} If size is not 3 or wallet type is invalid.
    */
   constructor(bytes) {
     if (!bytes || bytes.length !== DESCRIPTOR_SIZE) {

@@ -3,7 +3,7 @@
 ![test](https://github.com/theQRL/wallet.js/actions/workflows/test.yml/badge.svg)
 [![codecov](https://codecov.io/gh/theQRL/wallet.js/branch/main/graph/badge.svg?token=HHVBFBVGFR)](https://codecov.io/gh/theQRL/wallet.js)
 
-Helper library for building and using Quantum Resistant Ledger(QRL) wallet.
+Helper library for building and using Quantum Resistant Ledger (QRL) wallet.
 
 ## Installation
 
@@ -30,7 +30,7 @@ console.log('Mnemonic:', wallet.getMnemonic());
 
 // 2. Deterministic wallet from a known seed
 const seed = Seed.from('0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef')
-const determinstic = MLDSA87.newWalletFromSeed(seed, [0x01, 0x02]);
+const deterministic = MLDSA87.newWalletFromSeed(seed, [0x01, 0x02]);
 
 // 3. Extended seed round-trip
 const descriptor = newMLDSA87Descriptor([0xaa, 0xbb]);
