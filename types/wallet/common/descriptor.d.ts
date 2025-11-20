@@ -7,7 +7,7 @@ export class Descriptor {
     static from(input: string | Uint8Array | Buffer | number[]): Descriptor;
     /**
      * @param {Uint8Array|number[]} bytes Must be exactly 3 bytes.
-     * @throws {Error} Ff size is not 3 or wallet type is invalid.
+     * @throws {Error} If size is not 3 or wallet type is invalid.
      */
     constructor(bytes: Uint8Array | number[]);
     /** @private @type {Uint8Array} */
