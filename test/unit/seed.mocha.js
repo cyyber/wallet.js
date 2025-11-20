@@ -3,6 +3,7 @@ const { Seed, ExtendedSeed } = require('../../src/wallet/common/seed.js');
 const { SEED_SIZE, EXTENDED_SEED_SIZE } = require('../../src/wallet/common/constants.js');
 const { getDescriptorBytes, Descriptor } = require('../../src/wallet/common/descriptor.js');
 const { WalletType } = require('../../src/wallet/common/wallettype.js');
+const { sha256 } = require('@noble/hashes/sha2');
 
 function buildSeedBytes() {
     return Uint8Array.from(Array.from({ length: SEED_SIZE }, (_, i) => i));
@@ -14,8 +15,20 @@ function buildDescriptorBytes(metadata = [0, 0]) {
 
 describe('wallet/common/seed', () => {
     describe('Seed', () => {
+        it('creates from hex with separators', () => {
+            const seedBytes = buildSeedBytes();
+            const seedHex = Array.from(seedBytes)
+                .map((b) => b.toString(16).padStart(2, '0'))
+                .join(':');
+            const seed = Seed.from(`0x${seedHex}`)
+            expect(seed.toBytes()).to.deep.equal(seedBytes);
+        });
+
         it('produces correct sha256 hash', () => {
-            
+            const seedBytes = buildSeedBytes();
+            const seed = new Seed(seedBytes);
+            const expected = Uint8Array.from(sha256(seedBytes));
+            expect(seed.hashSHA256()).to.deep.equal(expected);
         });
 
         it('throws on invalid sizes', () => {
