@@ -48,10 +48,8 @@ describe('utils/bytes', () => {
     it('accepts Uint8Array or Buffer inputs', () => {
       const u8 = Uint8Array.from([9, 8, 7]);
       const buf = Buffer.from([6, 5, 4]);
-
       const fromU8 = toFixedU8(u8, 3);
       const fromBuf = toFixedU8(buf, 3);
-
       expect(fromU8).to.deep.equal(u8);
       expect(fromBuf).to.deep.equal(Uint8Array.from(buf));
     });
