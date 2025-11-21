@@ -15,7 +15,7 @@ const { ADDRESS_SIZE } = require('./constants.js');
  */
 function addressToString(addrBytes) {
   if (!addrBytes || addrBytes.length !== ADDRESS_SIZE) {
-    throw new Error(`addr must be ${ADDRESS_SIZE} bytes`);
+    throw new Error(`address must be ${ADDRESS_SIZE} bytes`);
   }
   const hex = [...addrBytes].map((b) => b.toString(16).padStart(2, '0')).join('');
   return `Q${hex}`;

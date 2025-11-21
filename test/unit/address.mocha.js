@@ -15,7 +15,7 @@ describe('wallet/common/address', () => {
   });
 
   it('addressToString throws on wrong length', () => {
-    expect(() => addressToString(Uint8Array.from([1, 2]))).to.throw('addr must be 20 bytes');
+    expect(() => addressToString(Uint8Array.from([1, 2]))).to.throw('address must be 20 bytes');
   });
 
   it('getAddressFromPKAndDescriptor derives expected address for vector', () => {
