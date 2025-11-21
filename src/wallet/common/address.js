@@ -26,7 +26,6 @@ function addressToString(addrBytes) {
  * @param {Uint8Array} pk
  * @param {Descriptor} descriptor
  * @returns {Uint8Array} 20-byte address.
- * @throws {Error} If the derived address length is not `ADDRESS_SIZE`.
  */
 function getAddressFromPKAndDescriptor(pk, descriptor) {
   if (!(pk instanceof Uint8Array)) throw new Error('pk must be Uint8Array');

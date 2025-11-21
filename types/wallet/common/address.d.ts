@@ -11,7 +11,6 @@ export function addressToString(addrBytes: Uint8Array): string;
  * @param {Uint8Array} pk
  * @param {Descriptor} descriptor
  * @returns {Uint8Array} 20-byte address.
- * @throws {Error} If the derived address length is not `ADDRESS_SIZE`.
  */
 export function getAddressFromPKAndDescriptor(pk: Uint8Array, descriptor: any): Uint8Array;
 //# sourceMappingURL=address.d.ts.map
