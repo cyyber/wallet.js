@@ -5,8 +5,8 @@
 
 /** @typedef {import('./common/descriptor.js').Descriptor} Descriptor */
 const { SHAKE } = require('sha3');
-const { ADDRESS_SIZE } = require('./constants.js');
 const { CryptoPublicKeyBytes } = require('@theqrl/mldsa87');
+const { ADDRESS_SIZE } = require('./constants.js');
 
 /**
  * Convert address bytes to string form.

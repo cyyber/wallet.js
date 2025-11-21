@@ -1,11 +1,11 @@
 const { expect } = require('chai');
 const { hexToBytes, bytesToHex } = require('@noble/hashes/utils');
+const { CryptoPublicKeyBytes } = require('@theqrl/mldsa87');
 const { walletTestCases } = require('../fixtures/ml_dsa_87.fixtures.js');
 const { addressToString, getAddressFromPKAndDescriptor } = require('../../src/wallet/common/address.js');
 const { Descriptor } = require('../../src/wallet/common/descriptor.js');
 const { DESCRIPTOR_SIZE } = require('../../src/wallet/common/constants.js');
 const { WalletType } = require('../../src/wallet/common/wallettype.js');
-const { CryptoPublicKeyBytes } = require('@theqrl/mldsa87');
 
 describe('wallet/common/address', () => {
   const tc = walletTestCases[0];
@@ -23,9 +23,7 @@ describe('wallet/common/address', () => {
   it('getAddressFromPKAndDescriptor rejects wrong pk length for ML-DSA-87', () => {
     const desc = new Descriptor(Uint8Array.from([WalletType.ML_DSA_87, 0, 0]));
     const badPk = new Uint8Array(CryptoPublicKeyBytes - 1);
-    expect(() => getAddressFromPKAndDescriptor(badPk, desc)).to.throw(
-      `pk must be ${CryptoPublicKeyBytes} bytes`
-    )
+    expect(() => getAddressFromPKAndDescriptor(badPk, desc)).to.throw(`pk must be ${CryptoPublicKeyBytes} bytes`);
   });
 
   it('getAddressFromPKAndDescriptor derives expected address for vector', () => {
