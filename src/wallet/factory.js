@@ -1,6 +1,5 @@
 /**
  * Auto-select wallet implementation based on the ExtendedSeed descriptor.
- * Descriptor layout(3 bytes): [ type(uint8), meta0, meta1 ]
  * @module wallet/factory
  */
 
